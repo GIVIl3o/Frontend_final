@@ -8,8 +8,12 @@ module.exports=function(grunt){
 	grunt.initConfig({
 		concat:{
 			js:{
-				src: ["translated/asd.js","translated/test.js"],
+				src: ["translated/music_player.js"],
 				dest: "build/main.js",
+			},
+			css:{
+				src: ["css/music_player.css"],
+				dest: "build/styles.css",
 			},
 		},
 	});

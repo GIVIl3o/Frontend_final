@@ -1,0 +1,36 @@
+<html>
+
+	<script src="../node_modules/navigo/lib/navigo.js"></script>
+	<script src="main.js"></script>
+	<link rel="stylesheet" href="styles.css">
+
+	<head>
+		<title>test</title>
+	</head>
+
+	<body>
+		<div id="navbar">this is navbar</div>
+
+
+		<div id="mainContent">
+		</div>
+
+	</body>
+
+	<script>
+		var router = new Navigo(null,true, "#!");
+		var main_content=document.getElementById("mainContent");
+		router.on({
+    'asd': function () {
+      alert("hehehe");
+    },
+    '*': function () {
+      main_content.innerHTML=get_music_player();
+      add_music_player_listeners();
+    }
+  })
+  .resolve();
+	</script>
+
+
+</html>
