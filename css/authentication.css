@@ -1,0 +1,64 @@
+
+
+.authentication_form{
+	left: 40%;
+	top: 30%;
+	position: fixed;
+	width: 400px;
+	height: 400px;
+	background-color: black;
+	padding: 30px;
+}
+.authentication_error{
+	background-color: red;
+	color: white;
+	width: 200px;
+	text-align:center;
+	padding: 10px;
+	opacity: 0;
+	transition: 1s;
+}
+
+.show_authentication_error{
+	opacity: 1;
+}
+
+.authentication_form h3{
+	color:white;
+	text-align:center;
+	margin-top: 15%;
+}
+
+#login_button{
+	width:150px;
+	text-align: center;
+	border-radius: 20px;
+	outline:none;
+	border:none;
+}
+
+.centered{
+	text-align: center;
+	margin-bottom: 30px;
+}
+.form_input{
+	padding: 10px;
+	color: white;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid;
+	border-color: white;
+}
+
+.form_submit{
+	background-color: #b84594;
+	color: white;
+	padding:10px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.form_submit:hover{
+	background-color: cornflowerblue;
+}

@@ -19,6 +19,16 @@ var translate_words = [
         GEO: "შენი სიები",
         ENG:"Your Playlists",
     },
+    {
+        id: "log-in",
+        GEO: "ავტორიზაცია",
+        ENG: "Log In",
+    },
+    {
+        id: "registration",
+        GEO: "რეგისტრაცია",
+        ENG: "Registration",
+    },
 ];
 
 function get_translate_words_ids() {

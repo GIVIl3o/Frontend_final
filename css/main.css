@@ -43,3 +43,8 @@ a:hover {
 form {
     margin:0;
 }
+.user_in{
+    padding: 0px;
+    width: 100px;
+    text-align: center;
+}

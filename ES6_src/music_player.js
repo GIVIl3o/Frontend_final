@@ -26,6 +26,8 @@ function player_right_side(music){
 
 
 function get_music_player(all_music,put_html){
+	all_music=JSON.parse(all_music);
+	
 	var html="";
 	html+="<div class='possible_music'>";
 	html+=player_right_side(all_music);

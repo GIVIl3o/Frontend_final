@@ -19,5 +19,13 @@ CREATE TABLE IF NOT EXISTS music (
     FOREIGN KEY (band_id) REFERENCES bands(id)
 );
 
+CREATE TABLE IF NOT EXISTS users(
+    username varchar(100),
+    `password` varchar(500),
+    primary key(username)
+);
+
 
 drop database frontend_final;
+
+select * from users;

@@ -5,15 +5,54 @@ function send_post_request(url, data, raise_function, arg) {
 	var params = data;
 	http.open('post', url, false);
 
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.setRequestHeader('Content-Type', 'application/json');
 
 	http.onreadystatechange = function () {
 		if (http.readyState == 4 && http.status == 200) {
-			var obj = JSON.parse(http.responseText);
-			raise_function(obj, arg);
+			raise_function(http.responseText, arg);
 		}
 	};
 	http.send(params);
+}
+"use strict";
+
+function authentication_html(upper_text, submit_text, url) {
+	var html = "";
+	html += "<div class='authentication_form'>";
+	html += "		<div class='centered'><span id='authentication_error' class='authentication_error' ></span></div>";
+	html += "		<h3>" + upper_text + "</h3>";
+	html += "		<div>";
+	html += "			<div class='centered'><input type='text' class='form_input' placeholder='Login' id='username'></div>";
+	html += "			<div class='centered'><input type='password' class='form_input' placeholder='Password' id='password'><br></div>";
+	html += "			<div class='centered' ><input class='form_submit' type='submit' value='" + submit_text + "' id='login_button'></div>";
+	html += "			<input type='hidden' id='authentication_type' value='" + url + "'>";
+	html += "		</div>";
+	html += "</div>";
+	return html;
+}
+
+function login_response(response, not_used) {
+	if (response.length == 0) {
+		alert("success");
+	} else {
+		var el = document.getElementById("authentication_error");
+		el.innerHTML = response;
+		el.classList.add("show_authentication_error");
+		setTimeout(function () {
+			document.getElementById("authentication_error").classList.remove("show_authentication_error");
+		}, 3000);
+	}
+}
+
+function add_login_listeners() {
+	document.getElementById("login_button").addEventListener("click", function () {
+		var data = {
+			username: document.getElementById("username").value,
+			password: document.getElementById("password").value
+		};
+		data = JSON.stringify(data);
+		send_post_request(document.getElementById("authentication_type").value, data, login_response, null);
+	});
 }
 "use strict";
 
@@ -101,6 +140,8 @@ function player_right_side(music) {
 }
 
 function get_music_player(all_music, put_html) {
+	all_music = JSON.parse(all_music);
+
 	var html = "";
 	html += "<div class='possible_music'>";
 	html += player_right_side(all_music);
@@ -174,6 +215,16 @@ var translate_words = [
         id: "l-y-playlists",
         GEO: "შენი სიები",
         ENG:"Your Playlists",
+    },
+    {
+        id: "log-in",
+        GEO: "ავტორიზაცია",
+        ENG: "Log In",
+    },
+    {
+        id: "registration",
+        GEO: "რეგისტრაცია",
+        ENG: "Registration",
     },
 ];
 
