@@ -77,6 +77,36 @@ var translate_words = [
         GEO: "რეგისტრაცია",
         ENG: "REGISTER",
     },
+    {
+        id: "profile-tracks",
+        set_type: "innerHTML",
+        GEO: "სიმღერები",
+        ENG: "Tracks",
+    },
+    {
+        id: "profile-albums",
+        set_type: "innerHTML",
+        GEO: "ალბომები",
+        ENG: "Albums",
+    },
+    {
+        id: "profile-playlists",
+        set_type: "innerHTML",
+        GEO: "სიები",
+        ENG: "Playlists",
+    },
+    {
+        id: "rofile-followers",
+        set_type: "innerHTML",
+        GEO: "მომყოლები",
+        ENG: "Followers",
+    },
+    {
+        id: "profile-playlists",
+        set_type: "innerHTML",
+        GEO: "მიყვები",
+        ENG: "Following",
+    },
 ];
 
 function get_translate_words_ids() {

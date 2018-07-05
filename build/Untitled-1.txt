@@ -1,0 +1,24 @@
+    <div class="wrapper">
+        <div class="container">
+            <div class="profile-image"></div>
+            <div class="profile-content">
+                <div class="profile-navigation-bar flex">
+                    <div class="profile-navigation-item">
+                        <a id="profile-tracks" href="#">Trakcs</a>
+                    </div>
+                    <div class="profile-navigation-item">
+                        <a id="profile-albums" href="#">Albums</a>
+                    </div>
+                    <div class="profile-navigation-item">
+                        <a id="profile-playlists" href="#">Playlists</a>
+                    </div>
+                    <div class="profile-navigation-item">
+                        <a id="profile-followers" href="#">Followers</a>
+                    </div>
+                    <div class="profile-navigation-item">
+                        <a id="profile-playlists" href="#">Following</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

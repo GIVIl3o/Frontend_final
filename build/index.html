@@ -3,6 +3,7 @@
 <script src="../node_modules/navigo/lib/navigo.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.0/normalize.css">
 
 <head>
     <title>test</title>
@@ -30,16 +31,15 @@
             <div class="header-right flex">
                 <a class="menu-item flex" id="log-in" href="#login">Log In</a>
                 <a class="menu-item flex" id="registration" href="#registration">Registration</a>
-                <input type="text" name="search-field" placeholder="Search" id="search-field" class="search-field">
-                <a class="search-button">
-                    <div class="search-icon"></div>
-                </a>
+                
                 <a id="main-language">ENG</a>
                 <a id="second-language">GEO</a>
             </div>
         </div>
         <!--/.container  -->
     </header>
+
+
 
     <div id="mainContent">
     </div>
@@ -57,17 +57,17 @@
     var main_content = document.getElementById("mainContent");
     router.on({
         'login': function () {
-            document.getElementById("mainContent").innerHTML=authentication_html("Log In","GET STARTED","../php/login.php",0);
+            document.getElementById("mainContent").innerHTML = authentication_html("Log In", "GET STARTED", "../php/login.php", 0);
             add_login_listeners();
             ChangeLanguage(localStorage.getItem("language"));
         },
         'registration': function () {
-            document.getElementById("mainContent").innerHTML=authentication_html("Registration","REGISTER","../php/registration.php",1);
+            document.getElementById("mainContent").innerHTML = authentication_html("Registration", "REGISTER", "../php/registration.php", 1);
             add_login_listeners();
             ChangeLanguage(localStorage.getItem("language"));
         },
         '*': function () {
-            send_post_request('../php/get_all_songs.php',"",get_music_player,main_content);
+            send_post_request('../php/get_all_songs.php', "", get_music_player, main_content);
             ChangeLanguage(localStorage.getItem("language"));
         }
     })
