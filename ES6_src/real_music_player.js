@@ -8,10 +8,12 @@ function create_new_audio(src,change_max_time){
 		document.getElementById("current_playing_music_time").value=audio.currentTime;
 	});
 
-	if(change_max_time==1)
+	if(change_max_time==1){
 		audio.addEventListener("loadeddata", function() {
 			document.getElementById("current_playing_music_time").setAttribute("max",audio.duration);
 		});
+		audio.volume=document.getElementById("volume_range").value/100;
+	}
 }
 
 function get_player(song){
@@ -19,17 +21,17 @@ function get_player(song){
 
 	create_new_audio(song["src"],0);
 
-	var band=get_band_info(song["band_id"]);
+	//var band=get_band_info(song["band_id"]);
 
 	var html="";
 	html+="<input type='range' min='0' max='0' id='current_playing_music_time' value='0'>";
 	html+="<div class='music_player' >";
 	html+="<div class='player_centered'>";
 	html+="<button id='play_current_song' >play</button>";
-	html+="<img src="+band["cover"]+" width='60' height='40' id='now_playing_cover_photo'>";
-	html+="<h3 id='now_playing_name'>"+band["name"]+":"+song["name"]+"</h3>";
-	html+="<input type='range' min='0' max='100' id='volume_range'>";
-	html+="<input type='hidden' value='"+song["music_id"]+"' id='now_playing_music'>";
+	html+="<img src="+song["band_cover"]+" width='60' height='40' id='now_playing_cover_photo'>";
+	html+="<h3 id='now_playing_name'>"+song["band_name"]+":"+song["name"]+"</h3>";
+	html+="<input type='range' min='0' max='100' id='volume_range' value='100'>";
+	html+="<input type='hidden' value='0' id='now_playing_music'>";
 	html+="</div>";
 	html+="</div>";
 	return html;

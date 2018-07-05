@@ -1,3 +1,20 @@
+'use strict';
+
+function send_post_request(url, data, raise_function, arg) {
+	var http = new XMLHttpRequest();
+	var params = data;
+	http.open('post', url, false);
+
+	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+	http.onreadystatechange = function () {
+		if (http.readyState == 4 && http.status == 200) {
+			var obj = JSON.parse(http.responseText);
+			raise_function(obj, arg);
+		}
+	};
+	http.send(params);
+}
 "use strict";
 
 var audio = null;
@@ -8,9 +25,12 @@ function create_new_audio(src, change_max_time) {
 		document.getElementById("current_playing_music_time").value = audio.currentTime;
 	});
 
-	if (change_max_time == 1) audio.addEventListener("loadeddata", function () {
-		document.getElementById("current_playing_music_time").setAttribute("max", audio.duration);
-	});
+	if (change_max_time == 1) {
+		audio.addEventListener("loadeddata", function () {
+			document.getElementById("current_playing_music_time").setAttribute("max", audio.duration);
+		});
+		audio.volume = document.getElementById("volume_range").value / 100;
+	}
 }
 
 function get_player(song) {
@@ -18,17 +38,17 @@ function get_player(song) {
 
 	create_new_audio(song["src"], 0);
 
-	var band = get_band_info(song["band_id"]);
+	//var band=get_band_info(song["band_id"]);
 
 	var html = "";
 	html += "<input type='range' min='0' max='0' id='current_playing_music_time' value='0'>";
 	html += "<div class='music_player' >";
 	html += "<div class='player_centered'>";
 	html += "<button id='play_current_song' >play</button>";
-	html += "<img src=" + band["cover"] + " width='60' height='40' id='now_playing_cover_photo'>";
-	html += "<h3 id='now_playing_name'>" + band["name"] + ":" + song["name"] + "</h3>";
-	html += "<input type='range' min='0' max='100' id='volume_range'>";
-	html += "<input type='hidden' value='" + song["music_id"] + "' id='now_playing_music'>";
+	html += "<img src=" + song["band_cover"] + " width='60' height='40' id='now_playing_cover_photo'>";
+	html += "<h3 id='now_playing_name'>" + song["band_name"] + ":" + song["name"] + "</h3>";
+	html += "<input type='range' min='0' max='100' id='volume_range' value='100'>";
+	html += "<input type='hidden' value='0' id='now_playing_music'>";
 	html += "</div>";
 	html += "</div>";
 	return html;
@@ -53,65 +73,16 @@ function add_player_listeners() {
 		document.getElementById("current_playing_music_time").setAttribute("max", audio.duration);
 	});
 }
-
-
-var all_music = [
-	{	
-		music_id: 0,
-		name: "Crawling",
-		src: "../other/music/crawling.mp3",
-		band_id: 0, 
-	},
-	{	
-		music_id: 1,
-		name: "Runaway",
-		src: "../other/music/runaway.mp3",
-		band_id: 0,
-	},
-	{	
-		music_id: 2,
-		name: "PaperCut",
-		src: "../other/music/PaperCut.mp3",
-		band_id: 0,
-	},
-];
-
-function get_all_music(){
-	return all_music;
-}
-
-function get_music_count(){
-	return all_music.length;
-}
-
-function get_ith_music(i){
-	return all_music[i];
-}
-
-
-var bands_info = [
-	{	
-		name: "Linkin Park",
-		cover: "../other/covers/linkin_park.jpg",
-	},
-	{	
-		name: "test",
-		cover: "../other/covers/test.jpg",
-	},
-];
-
-
-function get_band_info(index){
-	return bands_info[index];
-}
 "use strict";
 
-function other_music_entry(index, music_name, music_path) {
+function other_music_entry(index, music_name, music_path, cover_path) {
 	var html = "";
 	html += "<div class='other_music_entry'>";
 	html += "		<div class='other_music_centered'>";
 	html += "			<span>" + index + ") " + music_name + "</span>";
 	html += "			<button class='other_music_play_button other_music_passive_button' id='other_music_entryN" + index + "' name=" + index + ">play now</button>";
+	html += "			<span class='display_none' id='other_music_full_nameN" + index + "'>" + music_name + "</span>";
+	html += "			<img src='" + cover_path + "' class='display_none' id='other_music_coverN" + index + "'>";
 	html += "		</div>";
 	html += "</div>";
 	return html;
@@ -122,35 +93,38 @@ function player_right_side(music) {
 	html += "<div class='music_player_other_music'>";
 
 	for (var i = 0; i < music.length; i++) {
-		var band = get_band_info(music[i]["band_id"]);
-		html += other_music_entry(i + 1, band["name"] + ":" + music[i]["name"], music[i]["path"]);
+		html += other_music_entry(i + 1, music[i]["band_name"] + ":" + music[i]["name"], music[i]["path"], music[i]["band_cover"]);
 	}
 
 	html += "</div>";
 	return html;
 }
 
-function get_music_player() {
-	var music = get_all_music();
-
+function get_music_player(all_music, put_html) {
 	var html = "";
 	html += "<div class='possible_music'>";
-	html += player_right_side(music);
+	html += player_right_side(all_music);
 	html += "</div>";
 
-	return html;
+	put_html.innerHTML = html;
+	add_music_player_listeners(all_music);
+
+	document.getElementById("music_player").innerHTML = get_player(all_music[0]);
+	add_player_listeners();
 }
 
-function add_music_player_listeners() {
+function add_music_player_listeners(music) {
 	var cur;
 
 	var el = document.getElementById("other_music_entryN1");
 	el.classList.remove("other_music_passive_button");
 	el.innerHTML = "playing";
 
-	var music_cnt = get_music_count();
+	var music_cnt = music.length;
+
 	for (var i = 0; i < music_cnt; i++) {
 		cur = document.getElementById("other_music_entryN" + (i + 1));
+
 		cur.addEventListener("click", function () {
 
 			var now_playing_id = document.getElementById('now_playing_music').value;
@@ -164,10 +138,12 @@ function add_music_player_listeners() {
 			this.classList.remove("other_music_passive_button");
 			this.innerHTML = "playing";
 
-			var next_to_play = get_ith_music(parseInt(this.getAttribute("name")) - 1);
-			var band = get_band_info(next_to_play["band_id"]);
-			document.getElementById("now_playing_name").innerHTML = band["name"] + ":" + next_to_play["name"];
-			document.getElementById("now_playing_cover_photo").src = band["cover"];
+			var next_index = parseInt(this.getAttribute("name") - 1);
+			var next_to_play = music[next_index];
+
+			next_index++;
+			document.getElementById("now_playing_name").innerHTML = document.getElementById("other_music_full_nameN" + next_index).innerHTML;
+			document.getElementById("now_playing_cover_photo").src = document.getElementById("other_music_coverN" + next_index).src;
 
 			audio.pause();
 

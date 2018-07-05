@@ -10,6 +10,9 @@
 	height:410px;
 	padding: 15px;
 }
+.display_none{
+	display: none;
+}
 
 .other_music_entry{
 	background-color: #eff2f3;

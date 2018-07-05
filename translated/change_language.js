@@ -1,8 +1,6 @@
 "use strict";
 
 function AddLanguageListeners() {
-
-    console.log("setting");
     var cur = document.querySelector("#main-language");
     var cur1 = document.querySelector("#second-language");
     cur.addEventListener("click", function () {
@@ -15,17 +13,21 @@ function AddLanguageListeners() {
 }
 
 function ChangeLanguage(a) {
-    console.log("changing");
     localStorage.setItem("language", a);
 
     var ids = get_translate_words_ids();
     var language_words;
-    if (a == "ENG") language_words = get_translate_words_eng();else language_words = get_translate_words_geo();
+    if (a == "ENG") {
+        document.getElementById("search-field").placeholder = "Search";
+        language_words = get_translate_words_eng();
+    } else {
+        document.getElementById("search-field").placeholder = "ძებნა";
+        language_words = get_translate_words_geo();
+    }
 
     for (var i = 0; i < get_translate_words_count(); i++) {
         var language_id = ids[i];
         document.querySelector("#" + language_id).innerText = language_words[i];
-        // console.log(document.querySelector(ids[i]).innerText);
     }
 }
 

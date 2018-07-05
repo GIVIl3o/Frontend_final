@@ -8,8 +8,7 @@ module.exports=function(grunt){
 	grunt.initConfig({
 		concat:{
 			js:{
-				src: ["translated/real_music_player.js","other/database/all_music.js",
-				"other/database/bands.js","translated/music_player.js", 
+				src: ["translated/send_php_request.js","translated/real_music_player.js","translated/music_player.js", 
 				"other/database/language.js"],
 				dest: "build/main.js",
 			},
