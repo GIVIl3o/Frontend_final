@@ -57,15 +57,18 @@
     var main_content = document.getElementById("mainContent");
     router.on({
         'login': function () {
-            document.getElementById("mainContent").innerHTML=authentication_html("Log In","GET STARTED","../php/login.php");
+            document.getElementById("mainContent").innerHTML=authentication_html("Log In","GET STARTED","../php/login.php",0);
             add_login_listeners();
+            ChangeLanguage(localStorage.getItem("language"));
         },
         'registration': function () {
-            document.getElementById("mainContent").innerHTML=authentication_html("Registration","REGISTER","../php/registration.php");
+            document.getElementById("mainContent").innerHTML=authentication_html("Registration","REGISTER","../php/registration.php",1);
             add_login_listeners();
+            ChangeLanguage(localStorage.getItem("language"));
         },
         '*': function () {
             send_post_request('../php/get_all_songs.php',"",get_music_player,main_content);
+            ChangeLanguage(localStorage.getItem("language"));
         }
     })
         .resolve();

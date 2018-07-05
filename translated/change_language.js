@@ -17,17 +17,23 @@ function ChangeLanguage(a) {
 
     var ids = get_translate_words_ids();
     var language_words;
+
     if (a == "ENG") {
-        document.getElementById("search-field").placeholder = "Search";
         language_words = get_translate_words_eng();
     } else {
-        document.getElementById("search-field").placeholder = "ძებნა";
         language_words = get_translate_words_geo();
     }
 
     for (var i = 0; i < get_translate_words_count(); i++) {
         var language_id = ids[i];
-        document.querySelector("#" + language_id).innerText = language_words[i];
+
+        if (document.querySelector("#" + language_id) == null) continue;
+
+        if (id_get_type(language_id) == "innerHTML") document.querySelector("#" + language_id).innerText = language_words[i];
+
+        if (id_get_type(language_id) == "placeholder") document.querySelector("#" + language_id).placeholder = language_words[i];
+
+        if (id_get_type(language_id) == "value") document.querySelector("#" + language_id).value = language_words[i];
     }
 }
 

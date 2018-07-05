@@ -16,15 +16,15 @@ function send_post_request(url, data, raise_function, arg) {
 }
 "use strict";
 
-function authentication_html(upper_text, submit_text, url) {
+function authentication_html(upper_text, submit_text, url, registration) {
 	var html = "";
 	html += "<div class='authentication_form'>";
 	html += "		<div class='centered'><span id='authentication_error' class='authentication_error' ></span></div>";
-	html += "		<h3>" + upper_text + "</h3>";
+	html += "		<h3 id='authentication_text" + registration + "'>" + upper_text + "</h3>";
 	html += "		<div>";
 	html += "			<div class='centered'><input type='text' class='form_input' placeholder='Login' id='username'></div>";
 	html += "			<div class='centered'><input type='password' class='form_input' placeholder='Password' id='password'><br></div>";
-	html += "			<div class='centered' ><input class='form_submit' type='submit' value='" + submit_text + "' id='login_button'></div>";
+	html += "			<div class='centered' ><input class='form_submit' type='submit' value='" + submit_text + "' id='login_button" + registration + "'></div>";
 	html += "			<input type='hidden' id='authentication_type' value='" + url + "'>";
 	html += "		</div>";
 	html += "</div>";
@@ -45,7 +45,9 @@ function login_response(response, not_used) {
 }
 
 function add_login_listeners() {
-	document.getElementById("login_button").addEventListener("click", function () {
+	var log_button = document.getElementById("login_button0");
+	if (log_button == null) log_button = document.getElementById("login_button1");
+	log_button.addEventListener("click", function () {
 		var data = {
 			username: document.getElementById("username").value,
 			password: document.getElementById("password").value
@@ -198,33 +200,81 @@ function add_music_player_listeners(music) {
 var translate_words = [
 	{	
         id: "l-songs",
+        set_type: "innerHTML",
         GEO: "სიმღერები",
         ENG:"Songs",
 	},
     {	
         id: "l-albums",
+        set_type: "innerHTML",
         GEO: "ალბომები",
         ENG:"Albums",
     },
     {	
         id: "l-singers",
+        set_type: "innerHTML",
         GEO: "მომღერლები",
         ENG:"Singers",
     },
     {	
         id: "l-y-playlists",
+        set_type: "innerHTML",
         GEO: "შენი სიები",
         ENG:"Your Playlists",
     },
     {
         id: "log-in",
+        set_type: "innerHTML",
         GEO: "ავტორიზაცია",
         ENG: "Log In",
     },
     {
+        id: "search-field",
+        set_type: "placeholder",
+        GEO: "ძებნა",
+        ENG: "Search",
+    },
+    {
         id: "registration",
+        set_type: "innerHTML",
         GEO: "რეგისტრაცია",
         ENG: "Registration",
+    },
+    {
+        id: "authentication_text0",
+        set_type: "innerHTML",
+        GEO: "ექაუნთში შესვლა",
+        ENG: "Log In",
+    },
+    {
+        id: "authentication_text1",
+        set_type: "innerHTML",
+        GEO: "რეგისტრაცია",
+        ENG: "Registration",
+    },
+    {
+        id: "username",
+        set_type: "placeholder",
+        GEO: "მომხმარებლის სახელი",
+        ENG: "Username",
+    },
+    {
+        id: "password",
+        set_type: "placeholder",
+        GEO: "პაროლი",
+        ENG: "password",
+    },
+    {
+        id: "login_button0",
+        set_type: "value",
+        GEO: "შესვლა",
+        ENG: "GET STARTED",
+    },
+    {
+        id: "login_button1",
+        set_type: "value",
+        GEO: "რეგისტრაცია",
+        ENG: "REGISTER",
     },
 ];
 
@@ -234,6 +284,14 @@ function get_translate_words_ids() {
         ids.push(translate_words[i].id);
     }
     return ids;
+}
+
+function id_get_type(id){
+    for(var i=0; i<get_translate_words_count(); i++) {
+        if(id==translate_words[i]["id"])
+            return translate_words[i]["set_type"];
+    }
+    return -1;
 }
 
 function get_translate_words_eng() {

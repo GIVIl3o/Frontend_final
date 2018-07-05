@@ -29,7 +29,7 @@
 	margin-top: 15%;
 }
 
-#login_button{
+.form_submit{
 	width:150px;
 	text-align: center;
 	border-radius: 20px;
