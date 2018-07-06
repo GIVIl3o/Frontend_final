@@ -2,26 +2,14 @@
 
 var audio=null;
 
-function create_new_audio(src,change_max_time){
 	audio=new Audio(src);
 	audio.addEventListener("timeupdate",function(){
-		document.getElementById("current_playing_music_time").value=audio.currentTime;
 	});
 
-	if(change_max_time==1){
-		audio.addEventListener("loadeddata", function() {
-			document.getElementById("current_playing_music_time").setAttribute("max",audio.duration);
-		});
-		audio.volume=document.getElementById("volume_range").value/100;
-	}
 }
 
 function get_player(song){
 	if(audio!=null)audio.pause();
-
-	create_new_audio(song["src"],0);
-
-	//var band=get_band_info(song["band_id"]);
 
 	var html="";
 	html+="<input type='range' min='0' max='0' id='current_playing_music_time' value='0'>";
@@ -38,7 +26,7 @@ function get_player(song){
 }
 
 function add_player_listeners(){
-	var cur=document.getElementById("play_current_song");
+	/*var cur=document.getElementById("play-song");
 
 	cur.addEventListener("click",function(){
 			audio.play();
@@ -54,5 +42,5 @@ function add_player_listeners(){
 
 	audio.addEventListener("loadeddata", function() {
 		document.getElementById("current_playing_music_time").setAttribute("max",audio.duration);
-	});
+	});*/
 }
