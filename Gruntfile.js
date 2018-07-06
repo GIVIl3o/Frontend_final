@@ -13,7 +13,7 @@ module.exports=function(grunt){
 			},
 			css:{
 				src: ["css/music_player.css","css/profile.css", "css/real_music_player.css","css/header.css","css/main.css", "css/responsive.css",
-				"css/authentication.css", "css/recent-music.css", "css/music-player.css","css/playlist.css"],
+				"css/authentication.css", "css/recent-music.css", "css/music-player.css","css/playlist.css", "css/albums.css"],
 				dest: "build/styles.css",
 			},
 		},
