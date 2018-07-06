@@ -5,9 +5,9 @@ function other_music_entry(index,music_name,music_path,cover_path){
 	html+="		<div class='other_music_centered'>";
 	html+="			<button class='other_music_play_now' id='other_music_entryN"+index+"' name="+index+"></button>";
 	html+="			<div class='other_music_text'>";
-	html+="			<span>"+music_name+"</span><br><a href='#'>author</a>";
+	html+="			<span>"+music_name+"</span><br><a href='#' class='music_uploader'>author</a>";
 	html+="			</div>";
-	html+="			<button class='other_music_play_button' name="+index+" style='width: 150px;'>add to playlist</button>";
+	html+="			<button class='other_music_play_button' name="+index+" id='add_to_playlistN"+index+"'>add to playlist</button>";
 	html+="			<span class='display_none' id='other_music_full_nameN"+index+"'>"+music_name+"</span>";
 	html+="			<img src='"+cover_path+"' class='display_none' id='other_music_coverN"+index+"'>";
 	html+="		</div>";
@@ -70,6 +70,14 @@ function add_music_player_listeners(music){
 
 			audio.play();
 			document.getElementById("now_playing_music").setAttribute("value",this.getAttribute("name")-1);
+			document.getElementById("playlist").innerHTML="";
+		});
+
+		cur=document.getElementById("add_to_playlistN"+(i+1)).addEventListener("click",function(){
+			var next_index=parseInt(this.getAttribute("name")-1);
+			var to_add=music[next_index];
+
+			add_to_playlist(to_add);
 		});
 	}
 }

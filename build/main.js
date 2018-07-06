@@ -58,6 +58,32 @@ function add_login_listeners() {
 }
 "use strict";
 
+function add_to_playlist(music) {
+	var new_audio = new Audio(music["src"]);
+	new_audio.addEventListener("loadeddata", function () {
+		var html = "";
+		html += "<div class='playlist_music_entry'>";
+		html += "		<div class='playlist_entry_text'>";
+		html += "			<span class='playlist_song_name'>" + music["name"] + "</span><br>";
+		html += "			<span class='playlist_song_band'>" + music["band_name"] + "</span>";
+		html += "			<span class='display_none'>" + music["src"] + "</span>";
+		html += "			<span class='display_none'>" + music["band_cover"] + "</span>";
+		html += "		</div>";
+		var duration = this.duration;
+		html += "		<button class='delete_from_playlist' id='delete_playlist_entry'></button>";
+
+		html += "		<span class='playlist_duration'>" + Math.round(duration / 60) + ":" + Math.round(duration % 60) + "</span>";
+		html += "</div>";
+
+		document.getElementById("playlist").insertAdjacentHTML("beforeend", html);
+		document.getElementById("delete_playlist_entry").addEventListener("click", function () {
+			this.parentElement.remove();
+		});
+		document.getElementById("delete_playlist_entry").removeAttribute("id");
+	});
+}
+"use strict";
+
 var audio = null;
 
 function create_new_audio(src, change_max_time) {
@@ -122,9 +148,9 @@ function other_music_entry(index, music_name, music_path, cover_path) {
 	html += "		<div class='other_music_centered'>";
 	html += "			<button class='other_music_play_now' id='other_music_entryN" + index + "' name=" + index + "></button>";
 	html += "			<div class='other_music_text'>";
-	html += "			<span>" + music_name + "</span><br><a href='#'>author</a>";
+	html += "			<span>" + music_name + "</span><br><a href='#' class='music_uploader'>author</a>";
 	html += "			</div>";
-	html += "			<button class='other_music_play_button' name=" + index + " style='width: 150px;'>add to playlist</button>";
+	html += "			<button class='other_music_play_button' name=" + index + " id='add_to_playlistN" + index + "'>add to playlist</button>";
 	html += "			<span class='display_none' id='other_music_full_nameN" + index + "'>" + music_name + "</span>";
 	html += "			<img src='" + cover_path + "' class='display_none' id='other_music_coverN" + index + "'>";
 	html += "		</div>";
@@ -185,6 +211,14 @@ function add_music_player_listeners(music) {
 
 			audio.play();
 			document.getElementById("now_playing_music").setAttribute("value", this.getAttribute("name") - 1);
+			document.getElementById("playlist").innerHTML = "";
+		});
+
+		cur = document.getElementById("add_to_playlistN" + (i + 1)).addEventListener("click", function () {
+			var next_index = parseInt(this.getAttribute("name") - 1);
+			var to_add = music[next_index];
+
+			add_to_playlist(to_add);
 		});
 	}
 }

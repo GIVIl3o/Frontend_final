@@ -22,6 +22,7 @@
 	border: none;
 	outline: none;
 	margin-right: 20px;
+	cursor:pointer;
 }
 .other_music_text{
 	float:left;
@@ -51,11 +52,14 @@
 	background-color: black;
 	padding:5px;
 	margin-top: -3px;
-	width: 90px;
+	width: 120px;
 	cursor:pointer;
 }
 .other_music_play_button:hover{
 	background-color: red;
+}
+.music_uploader{
+	text-decoration: underline;
 }
 .profile-image {
     width:100%;
@@ -401,4 +405,34 @@ form {
     white-space: nowrap ;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.playlist_music_entry{
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	clear: both;
+	height: 40px;
+}
+
+.playlist_entry_text{
+	float:left;
+}
+
+.playlist_duration{
+	margin-top:10px;
+	float:right;
+}
+
+.delete_from_playlist{
+	background-image: url("../other/delete_playlist.png");
+	background-repeat:no-repeat;
+	width: 23px;
+	height: 25px;
+	border: none;
+	outline: none;
+	float: right;
+	margin-top:5px;
+	margin-left: 10px;
+	cursor: pointer;
 }

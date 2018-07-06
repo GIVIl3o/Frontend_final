@@ -22,6 +22,7 @@
 	border: none;
 	outline: none;
 	margin-right: 20px;
+	cursor:pointer;
 }
 .other_music_text{
 	float:left;
@@ -51,9 +52,12 @@
 	background-color: black;
 	padding:5px;
 	margin-top: -3px;
-	width: 90px;
+	width: 120px;
 	cursor:pointer;
 }
 .other_music_play_button:hover{
 	background-color: red;
+}
+.music_uploader{
+	text-decoration: underline;
 }
