@@ -7,6 +7,7 @@ function addMusicPlayerListeners() {
     nextSong();
     shuffleSong();
     muteUnmute();
+    volumeChange();
     likeSong();
 }
 
@@ -51,6 +52,18 @@ function muteUnmute() {
     var volume = document.querySelector("#volume");
     volume.addEventListener("click", function () {
         console.log("unmute");
+    });
+}
+
+function volumeChange() {
+    var volume = document.querySelector("#volume");
+    volume.addEventListener("mouseenter", function () {
+        var volumeSlider = document.querySelector("#volume-slider");
+        volumeSlider.style = "display: block;";
+    });
+    volume.addEventListener("mouseout", function () {
+        var volumeSlider = document.querySelector("#volume-slider");
+        volumeSlider.style = "display: none;";
     });
 }
 
