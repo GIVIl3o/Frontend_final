@@ -25,7 +25,3 @@ CREATE TABLE IF NOT EXISTS users(
     primary key(username)
 );
 
-
-drop database frontend_final;
-
-select * from users;

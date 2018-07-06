@@ -4,6 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.0/normalize.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+    crossorigin="anonymous">
 
 <head>
     <title>test</title>
@@ -55,18 +57,56 @@
         </div>
         <!--/.container  -->
     </header>
-
     <div class="wrapper">
         <div id="mainContent">
         </div>
     </div>
+    <div class="content">
 
-
-    <div id="music_player"></div>
+    </div>
+    <div class="music-player flex">
+        <div class="container music-player-container">
+            <div class="music-player-item" >
+                <i class="fas fa-fast-backward fa-color  fa-lg" id="previous-song"></i>
+            </div>
+            <div class="music-player-item">
+                <i class="fas fa-play-circle fa-color  fa-lg" id="play-song"></i>
+                <i class="fas fa-pause fa-color fa-lg" id="pause-song"></i>
+            </div>
+            <div class="music-player-item">
+                <i class="fas fa-fast-forward fa-color fa-lg" id="next-song"></i>
+            </div>
+            <div class="music-player-item">
+                <i class="fas fa-random fa-color  fa-lg" id="shuffle-song"></i>
+            </div>
+            <div class="music-player-slider">
+                <div class="slidecontainer">
+                    <input type="range" step="0.1" min="0" max="100" value="0" class="slider" id="music-slider">
+                </div>
+            </div>
+            <div class="music-player-item">
+                <i class="fas fa-volume-up fa-color fa-lg" id="volume"></i>
+            </div>
+            <div class="music-player-item ">
+                Music Name
+            </div>
+            <div class="music-player-item">
+                <i class="fas fa-heart fa-cog fa-lg" id="like-song"></i>
+            </div>
+        </div>
+        <!-- 
+     <div id="music_player"></div> -->
 </body>
 <script src="main.js" charset="utf-8"></script>
 
 <script src="../ES6_src/change_language.js" charset="utf-8"></script>
+
+<script>
+    var musicSlider = document.querySelector("#music-slider");
+    musicSlider.addEventListener("change", function () {
+        console.log(this.value);
+    });
+</script>
 
 <script>
 

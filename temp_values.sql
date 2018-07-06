@@ -1,8 +1,6 @@
 
 use frontend_final;
 
-DELETE FROM music where id!=-1;
-
 insert into bands(band_name,band_cover) values 
 ("Linkin Park","../other/covers/linkin_park.jpg");
 
