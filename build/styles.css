@@ -193,11 +193,24 @@ body{
     transform: translate(-50%, -50%);
 }
 body {
-    font-size:1em;
+    font-size: 1em;
+    position: relative;
 }
 
 body * {
     box-sizing: border-box;
+}
+
+.recent-music {
+    width: 250px;
+    height: 100%;
+    padding-top: 45px;
+    padding-bottom:50px;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color:white;
 }
 
 header {
@@ -216,6 +229,7 @@ header {
 
 .container {
     width: 1200px;
+    padding-left: 250px;
     margin: 0 auto;
     justify-content: space-between;
 }
@@ -240,15 +254,15 @@ a:hover {
 }
 
 form {
-    margin:0;
+    margin: 0;
 }
 
-.user_in{
+.user_in {
     padding: 0px;
     width: 100px;
     text-align: center;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1250px) {
     .container {
         width: 960px;
     }
@@ -340,4 +354,22 @@ form {
 
 .form_submit:hover{
 	background-color: cornflowerblue;
+}
+.recent-music-list {
+    width:230px;
+}
+
+.recent-music-list-item {
+    margin-left:10px;
+    max-width:230px;
+    width:230px;
+    margin-bottom: 10px;
+}
+
+.hide-long {
+    width:230px;
+    cursor: pointer;
+    white-space: nowrap ;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

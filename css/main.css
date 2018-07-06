@@ -1,9 +1,22 @@
 body {
-    font-size:1em;
+    font-size: 1em;
+    position: relative;
 }
 
 body * {
     box-sizing: border-box;
+}
+
+.recent-music {
+    width: 250px;
+    height: 100%;
+    padding-top: 45px;
+    padding-bottom:50px;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color:white;
 }
 
 header {
@@ -22,6 +35,7 @@ header {
 
 .container {
     width: 1200px;
+    padding-left: 250px;
     margin: 0 auto;
     justify-content: space-between;
 }
@@ -46,10 +60,10 @@ a:hover {
 }
 
 form {
-    margin:0;
+    margin: 0;
 }
 
-.user_in{
+.user_in {
     padding: 0px;
     width: 100px;
     text-align: center;
