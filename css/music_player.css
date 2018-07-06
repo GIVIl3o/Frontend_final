@@ -13,24 +13,33 @@
 .display_none{
 	display: none;
 }
-
+.other_music_play_now{
+	float:left;
+	background-image: url("../other/play.svg");
+	background-repeat:no-repeat;
+	width:20px;
+	height: 20px;
+	border: none;
+	outline: none;
+	margin-right: 20px;
+	cursor:pointer;
+}
+.other_music_text{
+	float:left;
+	margin-top: -5px;
+}
 .other_music_entry{
 	background-color: #eff2f3;
-	height: 30px;
-	padding: 10px;
+	height: 50px;
+	padding: 20px;
 	border-color: black;
 	border-radius: 50px;
-	width: 310px;
+	width: 500px;
 	margin-bottom: 10px;
 }
 
-.music_player_other_music{
-	overflow-y: scroll;
-	height: 400px;
-	float:left;
-}
 .other_music_centered{
-	margin-top:5px;
+	margin-top:-6px;
 }
 
 .other_music_play_button{
@@ -40,17 +49,15 @@
 	outline: none;
 	border: none;
 	color:white;
-	background-color: green;
+	background-color: black;
 	padding:5px;
 	margin-top: -3px;
-	width: 90px;
+	width: 120px;
 	cursor:pointer;
 }
-
-.other_music_passive_button{
-	background-color:black;
-}
-
-.other_music_passive_button:hover{
+.other_music_play_button:hover{
 	background-color: red;
+}
+.music_uploader{
+	text-decoration: underline;
 }
