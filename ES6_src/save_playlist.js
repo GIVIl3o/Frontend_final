@@ -1,6 +1,6 @@
 
 function save_playlist_response(response,not_used){
-	alert(response);
+	//alert(response);
 }
 
 function save_playlist(){

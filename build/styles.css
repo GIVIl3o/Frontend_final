@@ -72,6 +72,12 @@
 .my_profile{
     width: 100%;
 }
+.playlist_entry{
+    margin-top: 15px;
+}
+.playlist_now{
+    cursor:pointer;
+}
 .profile-image::after {
     content: "";
     display: block;
@@ -331,7 +337,7 @@ form {
 #save_pl_button{
     float:left;
     margin-left: 20px;
-    width:60px;
+    width:65px;
 }
 @media screen and (max-width: 1400px) {
     .container {
@@ -454,7 +460,7 @@ form {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.music-player {
+    .music-player {
     width: 100%;
     height: 50px;
     background-color: rgb(255, 156, 43);

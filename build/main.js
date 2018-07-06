@@ -34,6 +34,7 @@ function authentication_html(upper_text, submit_text, url, registration) {
 function login_response(response, not_used) {
 	if (response.length == 0) {
 		window.location.href = "#profile";
+		document.getElementById("authentication_div").innerHTML = "<a class='menu-item flex' id='my_profile' href='#profile'>Profile</a>";
 	} else {
 		user_name = null;
 		var el = document.getElementById("authentication_error");
@@ -155,8 +156,10 @@ function get_music_player(all_music, put_html) {
 	put_html.innerHTML = html;
 	add_music_player_listeners(all_music);
 
-	play_next_song(all_music[0]);
-	add_to_playlist(all_music[0]);
+	if (document.getElementById("playlist").innerHTML == "") {
+		play_next_song(all_music[0]);
+		add_to_playlist(all_music[0]);
+	}
 }
 
 function add_music_player_listeners(music) {
@@ -306,6 +309,30 @@ var translate_words = [
         set_type: "innerHTML",
         GEO: "მიყვები",
         ENG: "Following",
+    },
+    {
+        id: "new_playlist_name",
+        set_type: "placeholder",
+        GEO: "სიის სახელი",
+        ENG: "Playlist name",
+    },
+    {
+        id: "save_pl_button",
+        set_type: "innerHTML",
+        GEO: "შენახვა",
+        ENG: "save",
+    },
+    {
+        id: "profile-playlists",
+        set_type: "innerHTML",
+        GEO: "სიები",
+        ENG: "Playlists",
+    },
+    {
+        id: "my_profile",
+        set_type: "innerHTML",
+        GEO: "პროფილი",
+        ENG: "Profile",
     },
 ];
 
@@ -496,36 +523,56 @@ function likeSong() {
 addMusicPlayerListeners();
 "use strict";
 
+function get_cur_playlist(id, index, name) {
+    var html = "";
+    html += "<div class='playlist_entry'>";
+    html += "     <i class='fas fa-play-circle fa-color  fa-lg playlist_now' id='cur_playlist_btnN" + index + "'></i>";
+    html += "     <span class=''>" + index + ") " + name + "</span>";
+    html += "     <input type='hidden' class='hidden_id' value=" + id + ">";
+    html += "</div>";
+    return html;
+}
+
+function set_users_playlists(response, not_used) {
+    response = JSON.parse(response);
+
+    var html = "";
+    for (var i = 0; i < response.length; i++) {
+        html += get_cur_playlist(response[i]["id"], i, response[i]["name"]);
+    }
+    document.getElementById("users_playlists").innerHTML = html;
+    for (var i = 0; i < response.length; i++) {
+        document.getElementById("cur_playlist_btnN" + i).addEventListener("click", function () {
+            var cur = this.parentElement;
+            var id = parseInt(cur.querySelector(".hidden_id").value);
+
+            var data = {
+                playlist: id
+            };
+            send_post_request("../php/get_playlist.php", JSON.stringify(data), set_new_playlist, null);
+        });
+    }
+}
+
 function profile_html() {
     var html = "";
     html += "   <div class='my_profile'>";
     html += "       <div class='profile-image'></div>";
     html += "       <div class='profile-content'>";
     html += "           <div class='profile-navigation-bar flex'>";
-    html += "                <div class='profile-navigation-item'>";
-    html += "                    <a id='profile-tracks' href='#'>Trakcs</a>";
-    html += "               </div>";
-    html += "               <div class='profile-navigation-item'>";
-    html += "                   <a id='profile-albums' href='#'>Albums</a>";
-    html += "            </div>";
-    html += "            <div class='profile-navigation-item'>";
-    html += "                   <a id='profile-playlists' href='#'>Playlists</a>";
-    html += "            </div>";
-    html += "            <div class='profile-navigation-item'>";
-    html += "                   <a id='profile-followers' href='#'>Followers</a>";
-    html += "            </div>";
-    html += "            <div class='profile-navigation-item'>";
-    html += "                   <a id='profile-playlists' href='#'>Following</a>";
+    html += "            <div class='profile-navigation-item' id='profile-playlists'>";
+    html += "                   Playlists";
     html += "            </div>";
     html += "        </div>";
     html += "    </div>";
     html += "</div>";
+    html += "<div id='users_playlists'></div>";
     return html;
 }
 "use strict";
 
 function save_playlist_response(response, not_used) {
-	alert(response);
+	//alert(response);
 }
 
 function save_playlist() {
@@ -546,4 +593,20 @@ function save_playlist() {
 	};
 
 	send_post_request("../php/save_playlist.php", JSON.stringify(new_playlist), save_playlist_response, null);
+}
+"use strict";
+
+function set_new_playlist(response, not_used) {
+	response = JSON.parse(response);
+	document.getElementById("playlist").innerHTML = "";
+	document.getElementById("now_playing_playlist_index").value = 0;
+
+	audio.pause();
+	play_next_song(response[0]);
+	audio.play();
+
+	document.getElementById("play-song").click();
+	for (var i = 0; i < response.length; i++) {
+		add_to_playlist(response[i]);
+	}
 }

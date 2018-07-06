@@ -107,6 +107,30 @@ var translate_words = [
         GEO: "მიყვები",
         ENG: "Following",
     },
+    {
+        id: "new_playlist_name",
+        set_type: "placeholder",
+        GEO: "სიის სახელი",
+        ENG: "Playlist name",
+    },
+    {
+        id: "save_pl_button",
+        set_type: "innerHTML",
+        GEO: "შენახვა",
+        ENG: "save",
+    },
+    {
+        id: "profile-playlists",
+        set_type: "innerHTML",
+        GEO: "სიები",
+        ENG: "Playlists",
+    },
+    {
+        id: "my_profile",
+        set_type: "innerHTML",
+        GEO: "პროფილი",
+        ENG: "Profile",
+    },
 ];
 
 function get_translate_words_ids() {

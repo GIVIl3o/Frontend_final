@@ -9,6 +9,12 @@
 .my_profile{
     width: 100%;
 }
+.playlist_entry{
+    margin-top: 15px;
+}
+.playlist_now{
+    cursor:pointer;
+}
 .profile-image::after {
     content: "";
     display: block;

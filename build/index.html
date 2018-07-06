@@ -34,9 +34,10 @@
                 </div>
             </div>
             <div class="header-right flex">
-                <a class="menu-item flex" id="log-in" href="#login">Log In</a>
-                <a class="menu-item flex" id="registration" href="#registration">Registration</a>
-
+                <div class="flex" id="authentication_div">
+                    <a class="menu-item flex" id="log-in" href="#login">Log In</a>
+                    <a class="menu-item flex" id="registration" href="#registration">Registration</a>
+                </div>
                 <a id="main-language">ENG</a>
                 <a id="second-language">GEO</a>
             </div>
@@ -124,6 +125,10 @@
         },
         'profile': function () {
             document.getElementById("mainContent").innerHTML = profile_html();
+            var user={user:user_name};
+            user=JSON.stringify(user);
+            send_post_request("../php/get_playlists.php",user,set_users_playlists,null);
+            ChangeLanguage(localStorage.getItem("language"));
         },
         '*': function () {
             send_post_request('../php/get_all_songs.php', "", get_music_player, main_content);

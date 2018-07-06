@@ -18,6 +18,7 @@ function authentication_html(upper_text,submit_text,url,registration){
 function login_response(response,not_used){
 	if(response.length==0){
 		window.location.href="#profile";
+		document.getElementById("authentication_div").innerHTML="<a class='menu-item flex' id='my_profile' href='#profile'>Profile</a>";
 	}else{
 		user_name=null;
 		var el=document.getElementById("authentication_error");

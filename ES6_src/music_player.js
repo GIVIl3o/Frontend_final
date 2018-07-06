@@ -40,8 +40,10 @@ function get_music_player(all_music,put_html){
 	put_html.innerHTML=html;
 	add_music_player_listeners(all_music);
 
-	play_next_song(all_music[0]);
-	add_to_playlist(all_music[0]);
+	if(document.getElementById("playlist").innerHTML==""){
+		play_next_song(all_music[0]);
+		add_to_playlist(all_music[0]);
+	}
 }
 
 
