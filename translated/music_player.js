@@ -4,8 +4,11 @@ function other_music_entry(index, music_name, music_path, cover_path) {
 	var html = "";
 	html += "<div class='other_music_entry'>";
 	html += "		<div class='other_music_centered'>";
-	html += "			<span>" + index + ") " + music_name + "</span>";
-	html += "			<button class='other_music_play_button other_music_passive_button' id='other_music_entryN" + index + "' name=" + index + ">play now</button>";
+	html += "			<button class='other_music_play_now' id='other_music_entryN" + index + "' name=" + index + "></button>";
+	html += "			<div class='other_music_text'>";
+	html += "			<span>" + music_name + "</span><br><a href='#'>author</a>";
+	html += "			</div>";
+	html += "			<button class='other_music_play_button' name=" + index + " style='width: 150px;'>add to playlist</button>";
 	html += "			<span class='display_none' id='other_music_full_nameN" + index + "'>" + music_name + "</span>";
 	html += "			<img src='" + cover_path + "' class='display_none' id='other_music_coverN" + index + "'>";
 	html += "		</div>";
@@ -45,7 +48,6 @@ function add_music_player_listeners(music) {
 
 	var el = document.getElementById("other_music_entryN1");
 	el.classList.remove("other_music_passive_button");
-	el.innerHTML = "playing";
 
 	var music_cnt = music.length;
 
@@ -53,17 +55,6 @@ function add_music_player_listeners(music) {
 		cur = document.getElementById("other_music_entryN" + (i + 1));
 
 		cur.addEventListener("click", function () {
-
-			var now_playing_id = document.getElementById('now_playing_music').value;
-			now_playing_id++;
-
-			var cur_el = document.getElementById("other_music_entryN" + now_playing_id);
-			cur_el.classList.add("other_music_passive_button");
-			cur_el.innerHTML = "play now";
-
-			cur_el = document.getElementById("other_music_entryN" + (i + 1));
-			this.classList.remove("other_music_passive_button");
-			this.innerHTML = "playing";
 
 			var next_index = parseInt(this.getAttribute("name") - 1);
 			var next_to_play = music[next_index];

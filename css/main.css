@@ -7,6 +7,10 @@ body * {
     box-sizing: border-box;
 }
 
+#mainContent{
+    margin-left: 300px;
+}
+
 .recent-music {
     width: 250px;
     height: 100%;
