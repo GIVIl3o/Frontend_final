@@ -295,6 +295,14 @@ form {
     width: 100px;
     text-align: center;
 }
+
+.show {
+    display: inline;
+}
+
+.hide {
+    display: none;
+}
 @media screen and (max-width: 1400px) {
     .container {
         width: 1200px;
@@ -432,13 +440,11 @@ form {
 }
 
 .music-player-item {
-    margin-right: 10px;
     cursor: pointer;
 }
 
 .music-player-slider {
-    width: 50%;
-    margin-right: 10px;
+    width: 40%;
 }
 
 .slidecontainer {
@@ -478,12 +484,8 @@ form {
 }
 
 .volume-slider {
-    transform: rotate(90deg);
-    position: absolute;
-    display: none;
+    margin-left:5px;
     width: 100px;
-    top: -57px;
-    right: -39px;
 }
 
 .fa-color {

@@ -1,6 +1,13 @@
 
 build/main.js
-build/main.js
 build/styles.css
+translated
+build/styles.css
+translated/authentication.js
+translated/change_language.js
 translated/music-player.js
 translated/music_player.js
+translated/playlist.js
+translated/profile.js
+translated/real_music_player.js
+translated/send_php_request.js

@@ -421,7 +421,6 @@ function playSong() {
     pauseSong.addEventListener("click", function () {
         document.querySelector("#pause-song").style = "display:none";
         document.querySelector("#play-song").style = "display:inline";
-
         audio.pause();
     });
 }
@@ -448,14 +447,10 @@ function muteUnmute() {
 }
 
 function volumeChange() {
-    var volume = document.querySelector("#volume");
-    volume.addEventListener("mouseenter", function () {
-        var volumeSlider = document.querySelector("#volume-slider");
-        volumeSlider.style = "display: block;";
-    });
-    volume.addEventListener("mouseout", function () {
-        var volumeSlider = document.querySelector("#volume-slider");
-        volumeSlider.style = "display: none;";
+    var volume = document.querySelector("#volume-slider");
+    volume.addEventListener("change", function () {
+        audio.volume = volume.value;
+        console.log(volume.value);
     });
 }
 

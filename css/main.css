@@ -72,3 +72,11 @@ form {
     width: 100px;
     text-align: center;
 }
+
+.show {
+    display: inline;
+}
+
+.hide {
+    display: none;
+}
