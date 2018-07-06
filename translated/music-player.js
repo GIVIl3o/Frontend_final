@@ -8,6 +8,13 @@ function addMusicPlayerListeners() {
     shuffleSong();
     muteUnmute();
     likeSong();
+    slider_change();
+}
+
+function slider_change() {
+    document.getElementById("music-slider").addEventListener("change", function () {
+        audio.currentTime = document.getElementById("music-slider").value;
+    });
 }
 
 function previousSong() {
@@ -22,6 +29,8 @@ function pauseSong() {
     playSong.addEventListener("click", function () {
         document.querySelector("#play-song").style = "display:none";
         document.querySelector("#pause-song").style = "display:inline";
+
+        audio.play();
     });
 }
 
@@ -30,6 +39,8 @@ function playSong() {
     pauseSong.addEventListener("click", function () {
         document.querySelector("#pause-song").style = "display:none";
         document.querySelector("#play-song").style = "display:inline";
+
+        audio.pause();
     });
 }
 
