@@ -68,8 +68,11 @@ function previousSong() {
 function pauseSong() {
     var playSong = document.querySelector("#play-song");
     playSong.addEventListener("click", function() {
-        document.querySelector("#play-song").style="display:none";
-        document.querySelector("#pause-song").style="display:inline";
+
+        document.getElementById("play-song").classList.remove("fas");
+        document.getElementById("play-song").classList.add("show_item");
+        document.getElementById("pause-song").classList.remove("show_item");
+        document.getElementById("pause-song").classList.add("fas");
 
         audio.play();
     });
@@ -78,8 +81,11 @@ function pauseSong() {
 function playSong() {
     var pauseSong = document.querySelector("#pause-song");
     pauseSong.addEventListener("click", function() {
-        document.querySelector("#pause-song").style="display:none";
-        document.querySelector("#play-song").style="display:inline";
+
+        document.getElementById("pause-song").classList.remove("fas");
+        document.getElementById("pause-song").classList.add("show_item");
+        document.getElementById("play-song").classList.remove("show_item");
+        document.getElementById("play-song").classList.add("fas");
         audio.pause();
     });
 }
@@ -94,7 +100,17 @@ function nextSong() {
 function shuffleSong() {
     var shuffleSong = document.querySelector("#shuffle-song");
     shuffleSong.addEventListener("click", function() {
-        document.getElementById("shuffle_playlist").value=1-parseInt(document.getElementById("shuffle_playlist").value);
+        var val=parseInt(document.getElementById("shuffle_playlist").value);
+        val=1-val;
+        document.getElementById("shuffle_playlist").value=val;
+        if(val==1){
+            document.getElementById("shuffle-song").classList.remove("fa-color");
+            document.getElementById("shuffle-song").classList.add("shuffle_color");
+        }
+        else{
+            document.getElementById("shuffle-song").classList.add("fa-color");
+            document.getElementById("shuffle-song").classList.remove("shuffle_color");
+        }
     });
 }
 
