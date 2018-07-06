@@ -2,10 +2,16 @@
 
 var audio=null;
 
+function create_new_audio(src){
 	audio=new Audio(src);
 	audio.addEventListener("timeupdate",function(){
+		document.getElementById("music-slider").value=audio.currentTime;
 	});
 
+	audio.addEventListener("loadeddata", function() {
+		document.getElementById("music-slider").setAttribute("max",audio.duration);
+	});
+		//audio.volume=document.getElementById("volume_range").value/100;
 }
 
 function get_player(song){

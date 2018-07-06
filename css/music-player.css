@@ -25,16 +25,8 @@
 
 .slidecontainer {
     width: 100%;
-<<<<<<< HEAD
-    /* Width of the outside container */
 }
 
-/* The slider itself */
-
-=======
-}
-
->>>>>>> 95e1e9e7e5d7d077a3c86bfb9ecb5ab2e61f0d96
 .slider {
     -webkit-appearance: none;
     width: 100%;
@@ -42,10 +34,7 @@
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
-<<<<<<< HEAD
     -webkit-transition: .2s;
-=======
->>>>>>> 95e1e9e7e5d7d077a3c86bfb9ecb5ab2e61f0d96
     transition: opacity .2s;
 }
 
@@ -68,7 +57,6 @@
     background: #4CAF50;
     border-radius: 50%;
     cursor: pointer;
-<<<<<<< HEAD
 }
 
 .volume-slider {
@@ -78,8 +66,6 @@
     width: 100px;
     top: -57px;
     right: -39px;
-=======
->>>>>>> 95e1e9e7e5d7d077a3c86bfb9ecb5ab2e61f0d96
 }
 
 .fa-color {
