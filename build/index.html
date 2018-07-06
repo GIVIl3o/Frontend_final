@@ -81,12 +81,18 @@
             </div>
             <div class="music-player-item flex">
                 <i class="fas fa-volume-up fa-color fa-lg" id="volume"></i>
-                <input type="range" step="0.1" min="0" max="1" value="1" class="slider volume-slider" id="volume-slider">
+                <input type="range" step="0.01" min="0" max="1" value="1" class="slider volume-slider" id="volume-slider">
             </div>
             <div class="music-player-item ">
             </div>
             <div class="music-player-item">
                 <i class="fas fa-heart fa-cog fa-lg" id="like-song"></i>
+            </div>
+            <div class="display_none">
+                <input type="number" id="now_playing_playlist_index" value="0">
+            </div>
+            <div class="display_none">
+                <input type="number" id="shuffle_playlist" value="0">
             </div>
         </div>
 

@@ -39,10 +39,8 @@ function get_music_player(all_music,put_html){
 	put_html.innerHTML=html;
 	add_music_player_listeners(all_music);
 
-	create_new_audio(all_music[0]["src"]);
-	document.getElementById("playlist_cover_photo").src=all_music[0]["band_cover"];
-	document.getElementById("playlist_music_name").innerHTML=all_music[0]["name"]+":"+all_music[0]["band_name"];
-    add_player_listeners();
+	play_next_song(all_music[0]);
+	add_to_playlist(all_music[0]);
 }
 
 
@@ -60,19 +58,16 @@ function add_music_player_listeners(music){
 		cur.addEventListener("click",function(){
 
 			var next_index=parseInt(this.getAttribute("name")-1);
-			var next_to_play=music[next_index];
-
-			next_index++;
-			document.getElementById("playlist_music_name").innerHTML=document.getElementById("other_music_full_nameN"+next_index).innerHTML;
-			document.getElementById("playlist_cover_photo").src=document.getElementById("other_music_coverN"+next_index).src;
 
 			audio.pause();
 			
-			create_new_audio(next_to_play["src"]);
+			play_next_song(music[next_index]);
 
-			audio.play();
-			document.getElementById("now_playing_music").setAttribute("value",this.getAttribute("name")-1);
+			next_index++;
 			document.getElementById("playlist").innerHTML="";
+			document.getElementById("play-song").click();
+			document.getElementById("add_to_playlistN"+next_index).click();
+			document.getElementById("now_playing_playlist_index").value=0;
 		});
 
 		cur=document.getElementById("add_to_playlistN"+(i+1)).addEventListener("click",function(){
@@ -80,6 +75,11 @@ function add_music_player_listeners(music){
 			var to_add=music[next_index];
 
 			add_to_playlist(to_add);
+			if(audio.paused){
+				play_next_song(music[next_index]);
+				document.getElementById("play-song").click();
+				audio.play();
+			}
 		});
 	}
 }
