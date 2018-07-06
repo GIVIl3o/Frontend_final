@@ -91,3 +91,20 @@ form {
     clear: both;
     display: table;
 }
+
+.save_playlist{
+    width:280px;
+    height:100%;
+    margin-top: 25px;
+}
+#new_playlist_name{
+    display:inline;
+    outline: none;
+    float:left;
+    width: 165px;
+}
+#save_pl_button{
+    float:left;
+    margin-left: 20px;
+    width:60px;
+}

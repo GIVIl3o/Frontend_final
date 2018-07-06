@@ -9,6 +9,7 @@ function add_to_playlist(music){
 		html+="			<span class='playlist_song_band'>"+music["band_name"]+"</span>";
 		html+="			<span class='display_none music_src'>"+music["src"]+"</span>";
 		html+="			<span class='display_none band_cover'>"+music["band_cover"]+"</span>";
+		html+="			<span class='display_none music_id'>"+music["id"]+"</span>";
 		html+="		</div>";
 		var duration=this.duration;
 		html+="		<div>"

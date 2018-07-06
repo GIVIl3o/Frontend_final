@@ -19,6 +19,7 @@ function login_response(response,not_used){
 	if(response.length==0){
 		window.location.href="#profile";
 	}else{
+		user_name=null;
 		var el=document.getElementById("authentication_error");
 		el.innerHTML=response;
 		el.classList.add("show_authentication_error");
@@ -37,6 +38,7 @@ function add_login_listeners(){
 			username: document.getElementById("username").value,
 			password: document.getElementById("password").value,
 		};
+		user_name=data["username"];
 		data=JSON.stringify(data);
 		send_post_request(document.getElementById("authentication_type").value,data,login_response,null);
 	});
