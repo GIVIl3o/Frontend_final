@@ -58,28 +58,55 @@ function add_login_listeners() {
 }
 "use strict";
 
+function add_to_playlist(music) {
+	var new_audio = new Audio(music["src"]);
+	new_audio.addEventListener("loadeddata", function () {
+		var html = "";
+		html += "<div class='playlist_music_entry'>";
+		html += "		<div class='playlist_entry_text'>";
+		html += "			<span class='playlist_song_name'>" + music["name"] + "</span><br>";
+		html += "			<span class='playlist_song_band'>" + music["band_name"] + "</span>";
+		html += "			<span class='display_none'>" + music["src"] + "</span>";
+		html += "			<span class='display_none'>" + music["band_cover"] + "</span>";
+		html += "		</div>";
+		var duration = this.duration;
+		html += "		<button class='delete_from_playlist' id='delete_playlist_entry'></button>";
+
+		html += "		<span class='playlist_duration'>" + Math.round(duration / 60) + ":" + Math.round(duration % 60) + "</span>";
+		html += "</div>";
+
+		document.getElementById("playlist").insertAdjacentHTML("beforeend", html);
+		document.getElementById("delete_playlist_entry").addEventListener("click", function () {
+			this.parentElement.remove();
+		});
+		document.getElementById("delete_playlist_entry").removeAttribute("id");
+	});
+}
+"use strict";
+
 var audio = null;
 
-function create_new_audio(src, change_max_time) {
+function getTime(time) {
+	return Math.round(time / 60) + ":" + Math.round(time % 60);
+}
+
+function create_new_audio(src) {
 	audio = new Audio(src);
 	audio.addEventListener("timeupdate", function () {
-		document.getElementById("current_playing_music_time").value = audio.currentTime;
+		document.getElementById("music-slider").value = audio.currentTime;
+		document.getElementById("playlist_current_time").innerHTML = getTime(audio.currentTime) + "/" + getTime(audio.duration);
 	});
 
-	if (change_max_time == 1) {
-		audio.addEventListener("loadeddata", function () {
-			document.getElementById("current_playing_music_time").setAttribute("max", audio.duration);
-		});
-		audio.volume = document.getElementById("volume_range").value / 100;
-	}
+	audio.addEventListener("loadeddata", function () {
+		document.getElementById("music-slider").setAttribute("max", audio.duration);
+		document.getElementById("playlist_current_time").innerHTML = "0:0/" + getTime(audio.duration);
+	});
+
+	//audio.volume=document.getElementById("volume_range").value/100;
 }
 
 function get_player(song) {
 	if (audio != null) audio.pause();
-
-	create_new_audio(song["src"], 0);
-
-	//var band=get_band_info(song["band_id"]);
 
 	var html = "";
 	html += "<input type='range' min='0' max='0' id='current_playing_music_time' value='0'>";
@@ -96,23 +123,23 @@ function get_player(song) {
 }
 
 function add_player_listeners() {
-	var cur = document.getElementById("play_current_song");
-
-	cur.addEventListener("click", function () {
-		audio.play();
-	});
-
-	document.getElementById("volume_range").addEventListener("change", function () {
-		audio.volume = this.value / 100;
-	});
-
-	document.getElementById("current_playing_music_time").addEventListener("change", function () {
-		audio.currentTime = this.value;
-	});
-
-	audio.addEventListener("loadeddata", function () {
-		document.getElementById("current_playing_music_time").setAttribute("max", audio.duration);
-	});
+	/*var cur=document.getElementById("play-song");
+ 
+ cur.addEventListener("click",function(){
+ 		audio.play();
+ });
+ 
+ document.getElementById("volume_range").addEventListener("change",function(){
+ 		audio.volume=this.value/100;
+ });
+ 
+ document.getElementById("current_playing_music_time").addEventListener("change",function(){
+ 		audio.currentTime=this.value;
+ });
+ 
+ audio.addEventListener("loadeddata", function() {
+ 	document.getElementById("current_playing_music_time").setAttribute("max",audio.duration);
+ });*/
 }
 "use strict";
 
@@ -120,8 +147,11 @@ function other_music_entry(index, music_name, music_path, cover_path) {
 	var html = "";
 	html += "<div class='other_music_entry'>";
 	html += "		<div class='other_music_centered'>";
-	html += "			<span>" + index + ") " + music_name + "</span>";
-	html += "			<button class='other_music_play_button other_music_passive_button' id='other_music_entryN" + index + "' name=" + index + ">play now</button>";
+	html += "			<button class='other_music_play_now' id='other_music_entryN" + index + "' name=" + index + "></button>";
+	html += "			<div class='other_music_text'>";
+	html += "			<span>" + music_name + "</span><br><a href='#' class='music_uploader'>author</a>";
+	html += "			</div>";
+	html += "			<button class='other_music_play_button' name=" + index + " id='add_to_playlistN" + index + "'>add to playlist</button>";
 	html += "			<span class='display_none' id='other_music_full_nameN" + index + "'>" + music_name + "</span>";
 	html += "			<img src='" + cover_path + "' class='display_none' id='other_music_coverN" + index + "'>";
 	html += "		</div>";
@@ -152,7 +182,9 @@ function get_music_player(all_music, put_html) {
 	put_html.innerHTML = html;
 	add_music_player_listeners(all_music);
 
-	document.getElementById("music_player").innerHTML = get_player(all_music[0]);
+	create_new_audio(all_music[0]["src"]);
+	document.getElementById("playlist_cover_photo").src = all_music[0]["band_cover"];
+	document.getElementById("playlist_music_name").innerHTML = all_music[0]["name"] + ":" + all_music[0]["band_name"];
 	add_player_listeners();
 }
 
@@ -161,7 +193,6 @@ function add_music_player_listeners(music) {
 
 	var el = document.getElementById("other_music_entryN1");
 	el.classList.remove("other_music_passive_button");
-	el.innerHTML = "playing";
 
 	var music_cnt = music.length;
 
@@ -170,30 +201,27 @@ function add_music_player_listeners(music) {
 
 		cur.addEventListener("click", function () {
 
-			var now_playing_id = document.getElementById('now_playing_music').value;
-			now_playing_id++;
-
-			var cur_el = document.getElementById("other_music_entryN" + now_playing_id);
-			cur_el.classList.add("other_music_passive_button");
-			cur_el.innerHTML = "play now";
-
-			cur_el = document.getElementById("other_music_entryN" + (i + 1));
-			this.classList.remove("other_music_passive_button");
-			this.innerHTML = "playing";
-
 			var next_index = parseInt(this.getAttribute("name") - 1);
 			var next_to_play = music[next_index];
 
 			next_index++;
-			document.getElementById("now_playing_name").innerHTML = document.getElementById("other_music_full_nameN" + next_index).innerHTML;
-			document.getElementById("now_playing_cover_photo").src = document.getElementById("other_music_coverN" + next_index).src;
+			document.getElementById("playlist_music_name").innerHTML = document.getElementById("other_music_full_nameN" + next_index).innerHTML;
+			document.getElementById("playlist_cover_photo").src = document.getElementById("other_music_coverN" + next_index).src;
 
 			audio.pause();
 
-			create_new_audio(next_to_play["src"], 1);
+			create_new_audio(next_to_play["src"]);
 
 			audio.play();
 			document.getElementById("now_playing_music").setAttribute("value", this.getAttribute("name") - 1);
+			document.getElementById("playlist").innerHTML = "";
+		});
+
+		cur = document.getElementById("add_to_playlistN" + (i + 1)).addEventListener("click", function () {
+			var next_index = parseInt(this.getAttribute("name") - 1);
+			var to_add = music[next_index];
+
+			add_to_playlist(to_add);
 		});
 	}
 }
@@ -360,7 +388,15 @@ function addMusicPlayerListeners() {
     nextSong();
     shuffleSong();
     muteUnmute();
+    volumeChange();
     likeSong();
+    slider_change();
+}
+
+function slider_change() {
+    document.getElementById("music-slider").addEventListener("change", function () {
+        audio.currentTime = document.getElementById("music-slider").value;
+    });
 }
 
 function previousSong() {
@@ -375,6 +411,8 @@ function pauseSong() {
     playSong.addEventListener("click", function () {
         document.querySelector("#play-song").style = "display:none";
         document.querySelector("#pause-song").style = "display:inline";
+
+        audio.play();
     });
 }
 
@@ -383,6 +421,8 @@ function playSong() {
     pauseSong.addEventListener("click", function () {
         document.querySelector("#pause-song").style = "display:none";
         document.querySelector("#play-song").style = "display:inline";
+
+        audio.pause();
     });
 }
 
@@ -404,6 +444,18 @@ function muteUnmute() {
     var volume = document.querySelector("#volume");
     volume.addEventListener("click", function () {
         console.log("unmute");
+    });
+}
+
+function volumeChange() {
+    var volume = document.querySelector("#volume");
+    volume.addEventListener("mouseenter", function () {
+        var volumeSlider = document.querySelector("#volume-slider");
+        volumeSlider.style = "display: block;";
+    });
+    volume.addEventListener("mouseout", function () {
+        var volumeSlider = document.querySelector("#volume-slider");
+        volumeSlider.style = "display: none;";
     });
 }
 

@@ -63,7 +63,7 @@ function add_music_player_listeners(music){
 			var next_to_play=music[next_index];
 
 			next_index++;
-			document.getElementById("now_playing_name").innerHTML=document.getElementById("other_music_full_nameN"+next_index).innerHTML;
+			document.getElementById("playlist_music_name").innerHTML=document.getElementById("other_music_full_nameN"+next_index).innerHTML;
 			document.getElementById("playlist_cover_photo").src=document.getElementById("other_music_coverN"+next_index).src;
 
 			audio.pause();

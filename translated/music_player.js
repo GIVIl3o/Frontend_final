@@ -39,6 +39,9 @@ function get_music_player(all_music, put_html) {
 	put_html.innerHTML = html;
 	add_music_player_listeners(all_music);
 
+	create_new_audio(all_music[0]["src"]);
+	document.getElementById("playlist_cover_photo").src = all_music[0]["band_cover"];
+	document.getElementById("playlist_music_name").innerHTML = all_music[0]["name"] + ":" + all_music[0]["band_name"];
 	add_player_listeners();
 }
 
@@ -59,10 +62,12 @@ function add_music_player_listeners(music) {
 			var next_to_play = music[next_index];
 
 			next_index++;
-			document.getElementById("now_playing_name").innerHTML = document.getElementById("other_music_full_nameN" + next_index).innerHTML;
+			document.getElementById("playlist_music_name").innerHTML = document.getElementById("other_music_full_nameN" + next_index).innerHTML;
+			document.getElementById("playlist_cover_photo").src = document.getElementById("other_music_coverN" + next_index).src;
 
 			audio.pause();
 
+			create_new_audio(next_to_play["src"]);
 
 			audio.play();
 			document.getElementById("now_playing_music").setAttribute("value", this.getAttribute("name") - 1);
