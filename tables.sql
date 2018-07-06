@@ -10,12 +10,21 @@ CREATE TABLE IF NOT EXISTS bands (
     primary key(id)
 );
 
+CREATE TABLE IF NOT EXISTS albums (
+    id int auto_increment,
+    album_name varchar(100),
+    album_cover varchar(500),
+    primary key(id)
+);
+
 CREATE TABLE IF NOT EXISTS music (
     id int auto_increment,
     `name` varchar(100),
     src varchar(500),
     band_id int,
+    album_id int,
     primary key(id),
+    FOREIGN KEY (album_id) REFERENCES albums(id),
     FOREIGN KEY (band_id) REFERENCES bands(id)
 );
 
