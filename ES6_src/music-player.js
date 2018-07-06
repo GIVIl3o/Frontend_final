@@ -16,7 +16,16 @@ function play_next_song(song){
     document.getElementById("playlist_music_name").innerHTML=song["name"]+":"+song["band_name"];
 
 }
-
+function get_music_json(next_to_play){
+    var next_music={
+        name: next_to_play.querySelector(".playlist_song_name").innerHTML,
+        src: next_to_play.querySelector(".music_src").innerHTML,
+        band_name: next_to_play.querySelector(".playlist_song_band").innerHTML,
+        band_cover: next_to_play.querySelector(".band_cover").innerHTML,
+        id: parseInt(next_to_play.querySelector(".music_id").innerHTML),
+    };
+    return next_music;
+}
 function playlist_play_next(){
     var playlist=document.getElementById("playlist");
 
@@ -35,12 +44,7 @@ function playlist_play_next(){
         return;
     }
 
-    var next_music={
-        name: next_to_play.querySelector(".playlist_song_name").innerHTML,
-        src: next_to_play.querySelector(".music_src").innerHTML,
-        band_name: next_to_play.querySelector(".playlist_song_band").innerHTML,
-        band_cover: next_to_play.querySelector(".band_cover").innerHTML,
-    };
+    var next_music=get_music_json(next_to_play);
     play_next_song(next_music);
     audio.play();
 }

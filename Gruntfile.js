@@ -8,7 +8,7 @@ module.exports=function(grunt){
 		concat:{
 			js:{
 				src: ["translated/send_php_request.js","translated/authentication.js","translated/playlist.js","translated/real_music_player.js","translated/music_player.js", 
-				"other/database/language.js", "translated/music-player.js","translated/profile.js"],
+				"other/database/language.js", "translated/music-player.js","translated/profile.js","translated/save_playlist.js"],
 				dest: "build/main.js",
 			},
 			css:{

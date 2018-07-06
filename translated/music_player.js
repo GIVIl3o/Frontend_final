@@ -1,6 +1,6 @@
 "use strict";
 
-function other_music_entry(index, music_name, music_path, cover_path) {
+function other_music_entry(index, music_name, music_path, cover_path, music_id) {
 	var html = "";
 	html += "<div class='other_music_entry'>";
 	html += "		<div class='other_music_centered'>";
@@ -11,6 +11,7 @@ function other_music_entry(index, music_name, music_path, cover_path) {
 	html += "			<button class='other_music_play_button' name=" + index + " id='add_to_playlistN" + index + "'>add to playlist</button>";
 	html += "			<span class='display_none' id='other_music_full_nameN" + index + "'>" + music_name + "</span>";
 	html += "			<img src='" + cover_path + "' class='display_none' id='other_music_coverN" + index + "'>";
+	html += "			<input type='hidden' value=" + music_id + " id='secret_music_idN" + music_id + "'>";
 	html += "		</div>";
 	html += "</div>";
 	return html;
@@ -21,7 +22,7 @@ function player_right_side(music) {
 	html += "<div class='music_player_other_music'>";
 
 	for (var i = 0; i < music.length; i++) {
-		html += other_music_entry(i + 1, music[i]["band_name"] + ":" + music[i]["name"], music[i]["path"], music[i]["band_cover"]);
+		html += other_music_entry(i + 1, music[i]["band_name"] + ":" + music[i]["name"], music[i]["path"], music[i]["band_cover"], music[i]["id"]);
 	}
 
 	html += "</div>";

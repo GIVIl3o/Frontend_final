@@ -35,6 +35,7 @@ function login_response(response, not_used) {
 	if (response.length == 0) {
 		window.location.href = "#profile";
 	} else {
+		user_name = null;
 		var el = document.getElementById("authentication_error");
 		el.innerHTML = response;
 		el.classList.add("show_authentication_error");
@@ -52,6 +53,7 @@ function add_login_listeners() {
 			username: document.getElementById("username").value,
 			password: document.getElementById("password").value
 		};
+		user_name = data["username"];
 		data = JSON.stringify(data);
 		send_post_request(document.getElementById("authentication_type").value, data, login_response, null);
 	});
@@ -68,6 +70,7 @@ function add_to_playlist(music) {
 		html += "			<span class='playlist_song_band'>" + music["band_name"] + "</span>";
 		html += "			<span class='display_none music_src'>" + music["src"] + "</span>";
 		html += "			<span class='display_none band_cover'>" + music["band_cover"] + "</span>";
+		html += "			<span class='display_none music_id'>" + music["id"] + "</span>";
 		html += "		</div>";
 		var duration = this.duration;
 		html += "		<div>";
@@ -112,7 +115,7 @@ function create_new_audio(src) {
 }
 "use strict";
 
-function other_music_entry(index, music_name, music_path, cover_path) {
+function other_music_entry(index, music_name, music_path, cover_path, music_id) {
 	var html = "";
 	html += "<div class='other_music_entry'>";
 	html += "		<div class='other_music_centered'>";
@@ -123,6 +126,7 @@ function other_music_entry(index, music_name, music_path, cover_path) {
 	html += "			<button class='other_music_play_button' name=" + index + " id='add_to_playlistN" + index + "'>add to playlist</button>";
 	html += "			<span class='display_none' id='other_music_full_nameN" + index + "'>" + music_name + "</span>";
 	html += "			<img src='" + cover_path + "' class='display_none' id='other_music_coverN" + index + "'>";
+	html += "			<input type='hidden' value=" + music_id + " id='secret_music_idN" + music_id + "'>";
 	html += "		</div>";
 	html += "</div>";
 	return html;
@@ -133,7 +137,7 @@ function player_right_side(music) {
 	html += "<div class='music_player_other_music'>";
 
 	for (var i = 0; i < music.length; i++) {
-		html += other_music_entry(i + 1, music[i]["band_name"] + ":" + music[i]["name"], music[i]["path"], music[i]["band_cover"]);
+		html += other_music_entry(i + 1, music[i]["band_name"] + ":" + music[i]["name"], music[i]["path"], music[i]["band_cover"], music[i]["id"]);
 	}
 
 	html += "</div>";
@@ -367,7 +371,16 @@ function play_next_song(song) {
     document.getElementById("playlist_cover_photo").src = song["band_cover"];
     document.getElementById("playlist_music_name").innerHTML = song["name"] + ":" + song["band_name"];
 }
-
+function get_music_json(next_to_play) {
+    var next_music = {
+        name: next_to_play.querySelector(".playlist_song_name").innerHTML,
+        src: next_to_play.querySelector(".music_src").innerHTML,
+        band_name: next_to_play.querySelector(".playlist_song_band").innerHTML,
+        band_cover: next_to_play.querySelector(".band_cover").innerHTML,
+        id: parseInt(next_to_play.querySelector(".music_id").innerHTML)
+    };
+    return next_music;
+}
 function playlist_play_next() {
     var playlist = document.getElementById("playlist");
 
@@ -386,12 +399,7 @@ function playlist_play_next() {
         return;
     }
 
-    var next_music = {
-        name: next_to_play.querySelector(".playlist_song_name").innerHTML,
-        src: next_to_play.querySelector(".music_src").innerHTML,
-        band_name: next_to_play.querySelector(".playlist_song_band").innerHTML,
-        band_cover: next_to_play.querySelector(".band_cover").innerHTML
-    };
+    var next_music = get_music_json(next_to_play);
     play_next_song(next_music);
     audio.play();
 }
@@ -513,4 +521,29 @@ function profile_html() {
     html += "    </div>";
     html += "</div>";
     return html;
+}
+"use strict";
+
+function save_playlist_response(response, not_used) {
+	alert(response);
+}
+
+function save_playlist() {
+	if (user_name == null) {
+		alert("login");return;
+	}
+	var cur_playlist = document.getElementById("playlist").childNodes;
+
+	var cur_arr = [];
+	for (var i = 0; i < cur_playlist.length; i++) {
+		cur_arr.push(get_music_json(cur_playlist[i])["id"]);
+	}
+
+	var new_playlist = {
+		name: document.getElementById("new_playlist_name").value,
+		user: user_name,
+		playlist: cur_arr
+	};
+
+	send_post_request("../php/save_playlist.php", JSON.stringify(new_playlist), save_playlist_response, null);
 }

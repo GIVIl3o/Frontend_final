@@ -25,3 +25,19 @@ CREATE TABLE IF NOT EXISTS users(
     primary key(username)
 );
 
+create table if not exists playlists(
+	id int auto_increment,
+    `name` varchar (100),
+    username varchar(100),
+	primary key(id),
+    FOREIGN KEY (username) REFERENCES users(username)
+);
+
+create table if not exists playlists_song_id(
+	playlist_id int,
+    song_id int,
+    FOREIGN KEY (playlist_id) REFERENCES playlists(id),
+	FOREIGN KEY (song_id) REFERENCES music(id)
+);
+
+
