@@ -69,7 +69,9 @@
     background-position: left top;
     position:relative;
 }
-
+.my_profile{
+    width: 100%;
+}
 .profile-image::after {
     content: "";
     display: block;
@@ -224,14 +226,11 @@ body{
 body {
     font-size: 1em;
     position: relative;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 body * {
     box-sizing: border-box;
-}
-
-#mainContent{
-    margin-left: 300px;
 }
 
 .recent-music {
@@ -309,7 +308,7 @@ form {
     }
 
     body {
-        font-size: 0.6em;
+        font-size: 1em;
     }
 }
 
@@ -319,7 +318,7 @@ form {
     }
 
     body {
-        font-size: 0.8em;
+        font-size: 0.9em;
     }
 }
 
@@ -518,31 +517,32 @@ form {
 }
 
 .playlist_music_entry{
-	margin-top: 10px;
-	margin-left: 10px;
-	margin-right: 10px;
-	clear: both;
+	justify-content: space-between;
+	margin: 10px 0 10px 10px;
 	height: 40px;
 }
 
-.playlist_entry_text{
-	float:left;
-}
-
-.playlist_duration{
-	margin-top:10px;
-	float:right;
-}
-
 .delete_from_playlist{
-	background-image: url("../other/delete_playlist.png");
-	background-repeat:no-repeat;
-	width: 23px;
-	height: 25px;
-	border: none;
-	outline: none;
-	float: right;
-	margin-top:5px;
-	margin-left: 10px;
 	cursor: pointer;
+}
+.center-inner {
+    display:flex;
+    align-items: center;
+}
+
+.album-list {
+    padding-top: 10px;
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+
+.album-list-item{
+    width:24%;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.album-cover {
+    width:100%;
+    height: 150px;
 }

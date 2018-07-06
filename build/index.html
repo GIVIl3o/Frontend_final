@@ -24,7 +24,7 @@
                     <a id="l-songs" href="#">Songs</a>
                 </div>
                 <div class="menu-item flex">
-                    <a id="l-albums" href="#">Albums</a>
+                    <a id="l-albums" href="#profile">Albums</a>
                 </div>
                 <div class="menu-item flex">
                     <a id="l-singers" href="#">Singers</a>
@@ -150,6 +150,9 @@
             document.getElementById("mainContent").innerHTML = authentication_html("Registration", "REGISTER", "../php/registration.php", 1);
             add_login_listeners();
             ChangeLanguage(localStorage.getItem("language"));
+        },
+        'profile': function () {
+            document.getElementById("mainContent").innerHTML = profile_html();
         },
         '*': function () {
             send_post_request('../php/get_all_songs.php', "", get_music_player, main_content);

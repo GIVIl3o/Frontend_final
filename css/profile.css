@@ -6,7 +6,9 @@
     background-position: left top;
     position:relative;
 }
-
+.my_profile{
+    width: 100%;
+}
 .profile-image::after {
     content: "";
     display: block;

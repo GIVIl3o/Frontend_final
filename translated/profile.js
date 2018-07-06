@@ -2,8 +2,7 @@
 
 function profile_html() {
     var html = "";
-    html += "<div class='wrapper'>";
-    html += "   <div class='container'>";
+    html += "   <div class='my_profile'>";
     html += "       <div class='profile-image'></div>";
     html += "       <div class='profile-content'>";
     html += "           <div class='profile-navigation-bar flex'>";
@@ -24,7 +23,6 @@ function profile_html() {
     html += "            </div>";
     html += "        </div>";
     html += "    </div>";
-    html += "</div>";
     html += "</div>";
     return html;
 }

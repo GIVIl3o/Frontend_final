@@ -33,7 +33,7 @@ function authentication_html(upper_text, submit_text, url, registration) {
 
 function login_response(response, not_used) {
 	if (response.length == 0) {
-		alert("success");
+		window.location.href = "#profile";
 	} else {
 		var el = document.getElementById("authentication_error");
 		el.innerHTML = response;
@@ -62,7 +62,7 @@ function add_to_playlist(music) {
 	var new_audio = new Audio(music["src"]);
 	new_audio.addEventListener("loadeddata", function () {
 		var html = "";
-		html += "<div class='playlist_music_entry'>";
+		html += "<div class='playlist_music_entry flex'>";
 		html += "		<div class='playlist_entry_text'>";
 		html += "			<span class='playlist_song_name'>" + music["name"] + "</span><br>";
 		html += "			<span class='playlist_song_band'>" + music["band_name"] + "</span>";
@@ -70,14 +70,16 @@ function add_to_playlist(music) {
 		html += "			<span class='display_none band_cover'>" + music["band_cover"] + "</span>";
 		html += "		</div>";
 		var duration = this.duration;
-		html += "		<button class='delete_from_playlist' id='delete_playlist_entry'></button>";
+		html += "		<div>";
+		html += "			<span class='playlist_duration'>" + Math.round(duration / 60) + ":" + Math.round(duration % 60) + "</span>";
 
-		html += "		<span class='playlist_duration'>" + Math.round(duration / 60) + ":" + Math.round(duration % 60) + "</span>";
+		html += "		<i class='fas fa-times fa-lg delete_from_playlist' id='delete_playlist_entry'></i>";
+		html += "	</div>";
 		html += "</div>";
 
 		document.getElementById("playlist").insertAdjacentHTML("beforeend", html);
 		document.getElementById("delete_playlist_entry").addEventListener("click", function () {
-			this.parentElement.remove();
+			this.parentElement.parentElement.remove();
 			document.getElementById("now_playing_playlist_index").value = -1;
 			playlist_play_next();
 		});
@@ -484,3 +486,31 @@ function likeSong() {
 }
 
 addMusicPlayerListeners();
+"use strict";
+
+function profile_html() {
+    var html = "";
+    html += "   <div class='my_profile'>";
+    html += "       <div class='profile-image'></div>";
+    html += "       <div class='profile-content'>";
+    html += "           <div class='profile-navigation-bar flex'>";
+    html += "                <div class='profile-navigation-item'>";
+    html += "                    <a id='profile-tracks' href='#'>Trakcs</a>";
+    html += "               </div>";
+    html += "               <div class='profile-navigation-item'>";
+    html += "                   <a id='profile-albums' href='#'>Albums</a>";
+    html += "            </div>";
+    html += "            <div class='profile-navigation-item'>";
+    html += "                   <a id='profile-playlists' href='#'>Playlists</a>";
+    html += "            </div>";
+    html += "            <div class='profile-navigation-item'>";
+    html += "                   <a id='profile-followers' href='#'>Followers</a>";
+    html += "            </div>";
+    html += "            <div class='profile-navigation-item'>";
+    html += "                   <a id='profile-playlists' href='#'>Following</a>";
+    html += "            </div>";
+    html += "        </div>";
+    html += "    </div>";
+    html += "</div>";
+    return html;
+}

@@ -17,7 +17,7 @@ function authentication_html(upper_text, submit_text, url, registration) {
 
 function login_response(response, not_used) {
 	if (response.length == 0) {
-		alert("success");
+		window.location.href = "#profile";
 	} else {
 		var el = document.getElementById("authentication_error");
 		el.innerHTML = response;
