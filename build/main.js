@@ -709,16 +709,17 @@ function update_band_selector(bands, not_used) {
 
 function add_content() {
 	var html = "";
+	html += "<div class='operation_succ' id='operation_succ'><span id='text_in_succ_op'>Operation Succesfull</span></div>";
 	html += "<div id='add_content'>";
 	html += "		<div id='add_band'>";
-	html += "			<input type='text' placeholder='Band Name' id='new_band_name'><br><br>";
-	html += "			<input type='text' placeholder='Image link' id='new_band_cover'><br><br>";
+	html += "			<input type='text' class='add-new-items' placeholder='Band Name' id='new_band_name'><br><br>";
+	html += "			<input type='text' class='add-new-items' placeholder='Image link' id='new_band_cover'><br><br>";
 	html += "			<button class='add_content_btn' id='add_band_btn'>Add Band</button>";
 	html += "		</div>";
 	html += "		<div id='add_music'>";
-	html += "			<div id='band_selector'></div><br><br>";
-	html += "			<input type='text' placeholder='Music Name' id='new_music_name'><br><br>";
-	html += "			<input type='text' placeholder='Music source' id='new_music_src'><br><br>";
+	html += "			<div id='band_selector' class='add-new-items'></div><br><br>";
+	html += "			<input type='text' class='add-new-items' placeholder='Music Name' id='new_music_name'><br><br>";
+	html += "			<input type='text' class='add-new-items' placeholder='Music source' id='new_music_src'><br><br>";
 	html += "			<button class='add_content_btn' id='add_music_btn'>Add Music</button>";
 	html += "		</div>";
 	html += "</div>";
@@ -726,7 +727,11 @@ function add_content() {
 }
 
 function content_added(response, not_used) {
-	if (response == "") alert("succ");else alert(response);
+	var el = document.getElementById("operation_succ");
+	el.classList.add("operation_succ_display");
+	setTimeout(function () {
+		document.getElementById("operation_succ").classList.remove("operation_succ_display");
+	}, 3000);
 }
 
 function new_content_listeners() {
@@ -781,7 +786,10 @@ function createAlbumList(response, el) {
     for (var i = 0; i < response.length; i++) {
         document.getElementById("singerN" + response[i]["id"]).addEventListener("click", function () {
             var val = this.parentElement.querySelector(".current_band_id").value;
-            alert(val);
+            var data = {
+                band_id: val
+            };
+            send_post_request("../php/get_band_playlist.php", JSON.stringify(data), set_new_playlist, null);
         });
     }
 }

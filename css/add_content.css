@@ -1,7 +1,21 @@
 
+.operation_succ{
+	width:300px;
+	background-color:lime;
+	transition: 1s;
+	margin-left: 250px;
+	margin-top: 130px;
+	opacity: 0;
+}
+.operation_succ_display{
+	opacity: 1;
+}
+#text_in_succ_op{
+	margin-left: 70px;
+}
 
 #add_content{
-	margin-top:150px;
+	margin-top:120px;
 }
 
 #add_band{

@@ -14,6 +14,7 @@ function update_band_selector(bands,not_used){
 
 function add_content(){
 	var html="";
+	html+="<div class='operation_succ' id='operation_succ'><span id='text_in_succ_op'>Operation Succesfull</span></div>";
 	html+="<div id='add_content'>";
 	html+="		<div id='add_band'>";
 	html+="			<input type='text' class='add-new-items' placeholder='Band Name' id='new_band_name'><br><br>";
@@ -31,8 +32,11 @@ function add_content(){
 }
 
 function content_added(response,not_used){
-	if(response=="")alert("succ");
-	else alert(response);
+		var el=document.getElementById("operation_succ");
+		el.classList.add("operation_succ_display");
+		setTimeout(function(){
+			document.getElementById("operation_succ").classList.remove("operation_succ_display");
+		}, 3000);
 }
 
 function new_content_listeners(){

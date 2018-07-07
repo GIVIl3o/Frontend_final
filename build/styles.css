@@ -607,9 +607,23 @@ form {
 }
 
 
+.operation_succ{
+	width:300px;
+	background-color:lime;
+	transition: 1s;
+	margin-left: 250px;
+	margin-top: 130px;
+	opacity: 0;
+}
+.operation_succ_display{
+	opacity: 1;
+}
+#text_in_succ_op{
+	margin-left: 70px;
+}
 
 #add_content{
-	margin-top:150px;
+	margin-top:120px;
 }
 
 #add_band{
@@ -626,4 +640,29 @@ form {
 .add_content_btn{
 	width:160px;
 	height:30px;
+	border-radius: 15px;
+	overflow: hidden;
+	border: 1px solid rgb(99, 99, 99);
+	cursor: pointer;
+	background-color: rgb(255, 156, 43);
+}
+
+.add-new-items {
+	border: 1px solid rgb(99, 99, 99);
+	background-color: rgb(255, 156, 43);
+	padding: 10px 10px 10px 10px;
+	border-radius: 20px;
+}
+
+input:focus {
+    outline:none;
+}
+
+#possible_bands {
+	background-color: rgb(255, 156, 43);
+	border: 0;
+}
+
+#possible_bands:focus {
+	outline: none;
 }

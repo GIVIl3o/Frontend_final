@@ -26,7 +26,10 @@ function createAlbumList(response,el) {
     for(var i=0;i<response.length;i++){
         document.getElementById("singerN"+response[i]["id"]).addEventListener("click",function(){
             var val=this.parentElement.querySelector(".current_band_id").value;
-            alert(val);
+            var data={
+                band_id: val,
+            };
+            send_post_request("../php/get_band_playlist.php",JSON.stringify(data),set_new_playlist,null);
         });
     }
 }
