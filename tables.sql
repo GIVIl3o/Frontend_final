@@ -5,7 +5,7 @@ use frontend_final;
 
 CREATE TABLE IF NOT EXISTS bands (
     id int auto_increment,
-    band_name varchar(100) UNIQUE,
+    band_name varchar(100),
     band_cover varchar(500),
     primary key(id)
 
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS bands (
 
 CREATE TABLE IF NOT EXISTS albums (
     id int auto_increment,
-    album_name varchar(100) UNIQUE,
+    album_name varchar(100),
     album_cover varchar(500),
     primary key(id)
 );
@@ -24,9 +24,9 @@ CREATE TABLE IF NOT EXISTS music (
     src varchar(500),
     band_id int,
     album_id int,
-    username varchar(100),
+    author varchar(100),
     primary key(id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (author) REFERENCES users(id),
     FOREIGN KEY (album_id) REFERENCES albums(id),
     FOREIGN KEY (band_id) REFERENCES bands(id)
 );
