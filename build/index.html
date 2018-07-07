@@ -27,7 +27,7 @@
                     <a id="l-albums" href="#profile">Albums</a>
                 </div>
                 <div class="menu-item flex">
-                    <a id="l-singers" href="#">Singers</a>
+                    <a id="l-singers" href="#singers">Singers</a>
                 </div>
                 <div class="menu-item flex">
                     <a id="l-y-playlists" href="#">Your Playlists</a>
@@ -138,6 +138,11 @@
         'upload': function () {
             document.getElementById("mainContent").innerHTML = add_content();
             new_content_listeners();
+            ChangeLanguage(localStorage.getItem("language"));
+        },
+        'singers': function () {
+            //document.getElementById("mainContent").innerHTML = createAlbumList();
+            send_post_request("../php/get_all_albums.php",null,createAlbumList,document.getElementById("mainContent"));
             ChangeLanguage(localStorage.getItem("language"));
         },
         '*': function () {
