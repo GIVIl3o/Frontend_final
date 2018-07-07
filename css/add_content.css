@@ -18,4 +18,29 @@
 .add_content_btn{
 	width:160px;
 	height:30px;
+	border-radius: 15px;
+	overflow: hidden;
+	border: 1px solid rgb(99, 99, 99);
+	cursor: pointer;
+	background-color: rgb(255, 156, 43);
+}
+
+.add-new-items {
+	border: 1px solid rgb(99, 99, 99);
+	background-color: rgb(255, 156, 43);
+	padding: 10px 10px 10px 10px;
+	border-radius: 20px;
+}
+
+input:focus {
+    outline:none;
+}
+
+#possible_bands {
+	background-color: rgb(255, 156, 43);
+	border: 0;
+}
+
+#possible_bands:focus {
+	outline: none;
 }
