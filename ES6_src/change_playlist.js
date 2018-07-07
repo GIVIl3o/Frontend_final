@@ -1,5 +1,3 @@
-
-
 function set_new_playlist(response,not_used){
 	response=JSON.parse(response);
 	document.getElementById("playlist").innerHTML="";
