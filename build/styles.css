@@ -1,14 +1,14 @@
 
 .possible_music{
-	margin-top:100px;
-	margin-left:200px;
-	border-style: solid;
-	border-color: LightSlateGray;
-	border-radius: 20px;
-	border-width:2px;
-	width:700px;
-	height:410px;
-	padding: 15px;
+    margin-top: 100px;
+    margin-left: 200px;
+    /* border-style: solid; */
+    /* border-color: LightSlateGray; */
+    /* border-radius: 20px; */
+    /* border-width: 2px; */
+    width: 700px;
+    height: 410px;
+    padding: 15px;
 }
 .display_none{
 	display: none;
@@ -60,6 +60,10 @@
 }
 .music_uploader{
 	text-decoration: underline;
+}
+
+.music_player_other_music{
+	margin-bottom:80px;
 }
 .profile-image {
     width:100%;
@@ -257,6 +261,7 @@ body * {
     visibility: hidden;
 }
 header {
+    z-index: 2;
     width: 100%;
     height: 40px;
     border-bottom: 1px solid rgb(99, 99, 99);
@@ -329,10 +334,11 @@ form {
 }
 
 .save_playlist{
-    width:280px;
-    height:100%;
-    margin-top: 25px;
+    width: 0;
+    /* height: 100%; */
+    margin-top: 1px;
 }
+
 #new_playlist_name{
     display:inline;
     outline: none;
@@ -456,6 +462,10 @@ form {
     max-width:220px;
     width:220px;
     margin-bottom: 10px;
+}
+
+.playlist_entry_text {
+    width:165px;
 }
 
 .hide-long {

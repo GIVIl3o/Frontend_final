@@ -9,6 +9,10 @@
     margin-bottom: 10px;
 }
 
+.playlist_entry_text {
+    width:165px;
+}
+
 .hide-long {
     width:220px;
     cursor: pointer;
