@@ -131,6 +131,60 @@ var translate_words = [
         GEO: "პროფილი",
         ENG: "Profile",
     },
+    {
+        id: "l-y-upload",
+        set_type: "innerHTML",
+        GEO: "დამატება",
+        ENG: "Add Content",
+    },
+    {
+        id: "profile-songs",
+        set_type: "innerHTML",
+        GEO: "ჩემი სიმღერები",
+        ENG: "My songs",
+    },
+    {
+        id: "new_band_name",
+        set_type: "placeholder",
+        GEO: "ჯგუფის სახელი",
+        ENG: "Band Name",
+    },
+    {
+        id: "new_band_cover",
+        set_type: "placeholder",
+        GEO: "სურათის მისამართი",
+        ENG: "Image link",
+    },
+    {
+        id: "add_band_btn",
+        set_type: "innerHTML",
+        GEO: "ბენდის დამატება",
+        ENG: "Add Band",
+    },
+    {
+        id: "band_name_holder",
+        set_type: "innerHTML",
+        GEO: "ახალი მუსიკის ჯგუფი",
+        ENG: "New music's band",
+    },
+    {
+        id: "new_music_name",
+        set_type: "placeholder",
+        GEO: "მუსიკის სახელი",
+        ENG: "Music Name",
+    },
+    {
+        id: "new_music_src",
+        set_type: "placeholder",
+        GEO: "მუსიკის ლინკი",
+        ENG: "Music source",
+    },
+    {
+        id: "add_music_btn",
+        set_type: "innerHTML",
+        GEO: "მუსიკის დამატება",
+        ENG: "Add Music",
+    },
 ];
 
 function get_translate_words_ids() {

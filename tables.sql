@@ -17,21 +17,24 @@ CREATE TABLE IF NOT EXISTS albums (
     primary key(id)
 );
 
+
+CREATE TABLE IF NOT EXISTS users(
+    username varchar(100),
+    `password` varchar(500),
+    primary key(username)
+);
+
 CREATE TABLE IF NOT EXISTS music (
     id int auto_increment,
     `name` varchar(100),
     src varchar(500),
     band_id int,
     album_id int,
+    author varchar(100),
     primary key(id),
     FOREIGN KEY (album_id) REFERENCES albums(id),
-    FOREIGN KEY (band_id) REFERENCES bands(id)
-);
-
-CREATE TABLE IF NOT EXISTS users(
-    username varchar(100),
-    `password` varchar(500),
-    primary key(username)
+    FOREIGN KEY (band_id) REFERENCES bands(id),
+	FOREIGN KEY (author) REFERENCES users(username)
 );
 
 create table if not exists playlists(
@@ -48,5 +51,4 @@ create table if not exists playlists_song_id(
     FOREIGN KEY (playlist_id) REFERENCES playlists(id),
 	FOREIGN KEY (song_id) REFERENCES music(id)
 );
-
 

@@ -19,6 +19,11 @@ function login_response(response,not_used){
 	if(response.length==0){
 		window.location.href="#profile";
 		document.getElementById("authentication_div").innerHTML="<a class='menu-item flex' id='my_profile' href='#profile'>Profile</a>";
+		document.getElementById("authentication_div").addEventListener("click",function(){
+			cur_user=user_name;
+		})
+		cur_user=user_name;
+		document.getElementById("upload_new_content").classList.remove("visibility_none");
 	}else{
 		user_name=null;
 		var el=document.getElementById("authentication_error");

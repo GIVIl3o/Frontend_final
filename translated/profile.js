@@ -31,6 +31,12 @@ function set_users_playlists(response, not_used) {
     }
 }
 
+function set_users_music(response, not_used) {
+    console.log(response);
+    document.getElementById("users_songs").innerHTML = player_right_side(JSON.parse(response));
+    add_music_player_listeners(JSON.parse(response));
+}
+
 function profile_html() {
     var html = "";
     html += "   <div class='my_profile'>";
@@ -44,5 +50,15 @@ function profile_html() {
     html += "    </div>";
     html += "</div>";
     html += "<div id='users_playlists'></div>";
+
+    html += "       <div class='profile-content'>";
+    html += "           <div class='profile-navigation-bar flex'>";
+    html += "            <div class='profile-navigation-item' id='profile-songs'>";
+    html += "                   My songs";
+    html += "            </div>";
+    html += "        </div>";
+    html += "    </div>";
+    html += "<div id='users_songs'></div>";
+
     return html;
 }

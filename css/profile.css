@@ -6,6 +6,9 @@
     background-position: left top;
     position:relative;
 }
+#users_songs{
+    margin-top: 20px;
+}
 .my_profile{
     width: 100%;
 }

@@ -17,6 +17,6 @@ function save_playlist(){
 		user: user_name,
 		playlist:cur_arr,
 	};
-
+	document.getElementById("new_playlist_name").value="";
 	 send_post_request("../php/save_playlist.php",JSON.stringify(new_playlist),save_playlist_response,null);
 }
