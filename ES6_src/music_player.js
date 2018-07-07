@@ -1,11 +1,11 @@
 
-function other_music_entry(index,music_name,music_path,cover_path,music_id){
+function other_music_entry(index,music_name,music_path,cover_path,music_id,author){
 	var html="";
 	html+="<div class='other_music_entry'>";
 	html+="		<div class='other_music_centered'>";
 	html+="			<button class='other_music_play_now' id='other_music_entryN"+index+"' name="+index+"></button>";
 	html+="			<div class='other_music_text'>";
-	html+="			<span>"+music_name+"</span><br><a href='#' class='music_uploader'>author</a>";
+	html+="			<span>"+music_name+"</span><br><a href='#profile' class='music_uploader' id='uploaderN"+index+"'>"+author+"</a>";
 	html+="			</div>";
 	html+="			<button class='other_music_play_button' name="+index+" id='add_to_playlistN"+index+"'>add to playlist</button>";
 	html+="			<span class='display_none' id='other_music_full_nameN"+index+"'>"+music_name+"</span>";
@@ -21,7 +21,7 @@ function player_right_side(music){
 	html+="<div class='music_player_other_music'>";
 
 	for(var i=0;i<music.length;i++){
-		html+=other_music_entry(i+1,music[i]["band_name"]+":"+music[i]["name"],music[i]["path"],music[i]["band_cover"],music[i]["id"]);
+		html+=other_music_entry(i+1,music[i]["band_name"]+":"+music[i]["name"],music[i]["path"],music[i]["band_cover"],music[i]["id"],music[i]["author"]);
 	}
 
 	html+="</div>";
@@ -38,10 +38,19 @@ function get_music_player(all_music,put_html){
 	html+="</div>";
 
 	put_html.innerHTML=html;
+
+	for(var i=0;i<all_music.length;i++){
+		document.getElementById("uploaderN"+(i+1)).addEventListener("click",function(){
+			cur_user=this.innerHTML;
+		});
+	}
+
 	add_music_player_listeners(all_music);
 
-	play_next_song(all_music[0]);
-	add_to_playlist(all_music[0]);
+	if(document.getElementById("playlist").innerHTML==""){
+		play_next_song(all_music[0]);
+		add_to_playlist(all_music[0]);
+	}
 }
 
 
